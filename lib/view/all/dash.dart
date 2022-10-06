@@ -20,7 +20,7 @@ class _home_screenState extends State<home_screen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text('Online'), Text('master')],
+              children: [Text('ininini'), Text('master')],
             ),
             Container(
               decoration: const BoxDecoration(
