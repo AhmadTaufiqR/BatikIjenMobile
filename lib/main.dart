@@ -6,6 +6,6 @@ void main() => runApp(
       MaterialApp(
         theme: ThemeData(primaryColor: Colors.white),
         debugShowCheckedModeBanner: false,
-        home: register_page(),
+        home: SplashScreen(),
       ),
     );
