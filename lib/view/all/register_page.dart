@@ -207,7 +207,7 @@ class register_page extends StatelessWidget {
                           height: 30,
                         ),
                         Container(
-                          child: Text("------- atau -------"),
+                          child: Text("-------- atau --------"),
                         ),
                         SizedBox(
                           height: 20,
