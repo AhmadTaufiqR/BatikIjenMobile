@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ijen_batik/view/all/login_page.dart';
 import 'package:ijen_batik/view/components/background.dart';
+import 'package:ijen_batik/view/components/nafbar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Login_page(),
+          builder: (context) => login(),
         ),
       ),
     );
