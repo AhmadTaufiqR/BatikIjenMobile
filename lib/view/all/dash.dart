@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/view/all/login_page.dart';
 import 'package:ijen_batik/view/components/autocomplite.dart';
 import 'package:ijen_batik/view/components/categories.dart';
 
@@ -20,6 +21,7 @@ class _DashboardState extends State<Dashboard> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Dashboard(),
+    login(),
   ];
   @override
   Widget build(BuildContext context) {

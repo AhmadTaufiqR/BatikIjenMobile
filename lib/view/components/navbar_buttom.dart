@@ -16,7 +16,7 @@ class _navbar_bottomState extends State<navbar_bottom> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[];
+  static const List<Widget> _widgetOptions = <Widget>[Dashboard(), login()];
 
   void _onItemTapped(int index) {
     setState(() {
