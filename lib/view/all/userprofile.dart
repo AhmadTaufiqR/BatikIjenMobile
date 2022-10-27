@@ -2,16 +2,15 @@ import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/view/all/dash.dart';
-import 'package:ijen_batik/view/all/register_page.dart';
 
-class login extends StatefulWidget {
-  const login({super.key});
+class UserProfile extends StatefulWidget {
+  const UserProfile({super.key});
 
   @override
-  State<login> createState() => _loginState();
+  State<UserProfile> createState() => _UserProfileState();
 }
 
-class _loginState extends State<login> {
+class _UserProfileState extends State<UserProfile> {
   bool isActivate = false;
   TextEditingController? passwordController;
   TextEditingController? emailController;
@@ -52,7 +51,7 @@ class _loginState extends State<login> {
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.18),
                 child: Text(
-                  "Welcome Back To \nSanggar Batik",
+                  "Profile & Password",
                   style: GoogleFonts.dmSans(
                       fontWeight: FontWeight.bold, fontSize: 25),
                 ),
@@ -61,7 +60,7 @@ class _loginState extends State<login> {
                 height: 20,
               ),
               Text(
-                "Silahkan masukkan data untuk login",
+                "Lengkapi data terakhir berikut untuk masuk ke aplikasi Sanggar Batik",
                 style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -71,7 +70,7 @@ class _loginState extends State<login> {
                 height: 50,
               ),
               Text(
-                "Email/ Phone",
+                "Full Name",
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                 ),
@@ -94,7 +93,7 @@ class _loginState extends State<login> {
                           ),
                           borderSide: BorderSide.none,
                         ),
-                        hintText: "Masukkan Alamat Email/ No Telepon Anda",
+                        hintText: "Masukkan Nama Lengkap Anda",
                         hintStyle: TextStyle(
                             color: Color.fromRGBO(196, 197, 196, 100))),
                     style: TextStyle(
@@ -143,7 +142,25 @@ class _loginState extends State<login> {
                 ),
               ),
               SizedBox(
-                height: 80,
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    size: 15,
+                    color: Color.fromRGBO(131, 133, 137, 100),
+                  ),
+                  Text(
+                    " Kata Sandi Harus Lebih Dari 6 Karakter",
+                    style: GoogleFonts.dmSans(
+                        fontSize: 12,
+                        color: Color.fromRGBO(131, 133, 137, 100)),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
               ),
               Container(
                 width: 340,
@@ -160,51 +177,12 @@ class _loginState extends State<login> {
                         }
                       : null,
                   child: Text(
-                    "Sign In",
+                    "Continue",
                     style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 80,
-              ),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (BuildContext context) => Dashboard()));
-                    },
-                    child: Text(
-                      "Forgot Password ?",
-                      style: GoogleFonts.dmSans(
-                          color: Color.fromRGBO(12, 26, 48, 100),
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.43,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  register_page()));
-                    },
-                    child: Text(
-                      "Sign Up",
-                      style: GoogleFonts.dmSans(
-                          color: Color.fromRGBO(54, 105, 201, 100),
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
         ),
