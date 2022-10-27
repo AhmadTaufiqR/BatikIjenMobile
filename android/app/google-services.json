@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "80266699721",
+    "project_id": "sbproject-2f0f0",
+    "storage_bucket": "sbproject-2f0f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80266699721:android:82f6149da11197e7f4be18",
+        "android_client_info": {
+          "package_name": "com.example.ijen_batik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80266699721-mqccbibkq7bdsbsh34lbedk1grgk3r35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXA45bL-GNHgmXdHtoSNUEikwP4GKqc8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80266699721-mqccbibkq7bdsbsh34lbedk1grgk3r35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
