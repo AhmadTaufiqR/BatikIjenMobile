@@ -1,189 +1,212 @@
-import 'package:flutter/material.dart';
-import 'package:ijen_batik/view/all/register_page.dart';
-import 'package:ijen_batik/view/components/background.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/gestures.dart';
+import "package:flutter/material.dart";
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/view/all/dash.dart';
 
-class Login_page extends StatelessWidget {
-  const Login_page({super.key});
+class login extends StatefulWidget {
+  const login({super.key});
+
+  @override
+  State<login> createState() => _loginState();
+}
+
+class _loginState extends State<login> {
+  bool isActivate = false;
+  TextEditingController? passwordController;
+  TextEditingController? emailController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    passwordController = TextEditingController();
+    emailController = TextEditingController();
+    if (emailController != null) {
+      passwordController!.addListener(
+        () {
+          final isActivate = passwordController!.text.isNotEmpty;
+          setState(() => this.isActivate = isActivate);
+        },
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    passwordController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Background_image(assets: "assets/img/back2.png"),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
-            child: SafeArea(
-              child: Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.18),
+                child: Text(
+                  "Welcome Back To \nSanggar Batik",
+                  style: GoogleFonts.dmSans(
+                      fontWeight: FontWeight.bold, fontSize: 25),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Silahkan masukkan data untuk login",
+                style: GoogleFonts.dmSans(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Color.fromRGBO(131, 133, 137, 100)),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                "Email/ Phone",
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25),
+                child: SizedBox(
+                  height: 45,
+                  child: TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(246, 246, 246, 100),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: "Masukkan Alamat Email/ No Telepon Anda",
+                        hintStyle: TextStyle(
+                            color: Color.fromRGBO(196, 197, 196, 100))),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                "Password",
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25),
+                child: SizedBox(
+                  height: 45,
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromRGBO(246, 246, 246, 100),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: "Masukkan Kata Sandi Akun",
+                      hintStyle: TextStyle(
+                        color: Color.fromRGBO(196, 197, 196, 100),
+                      ),
+                    ),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 80,
+              ),
+              Container(
+                width: 340,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      onSurface: Color.fromRGBO(54, 105, 201, 100),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  onPressed: isActivate
+                      ? () {
+                          setState(() => isActivate = false);
+                          passwordController!.clear();
+                        }
+                      : null,
+                  child: Text(
+                    "Sign In",
+                    style: GoogleFonts.dmSans(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 80,
+              ),
+              Row(
                 children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.06),
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 80,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(
-                              right: 290.0,
-                              top: MediaQuery.of(context).size.height * 0.10),
-                          child: Text(
-                            "Username",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(right: 15.0, left: 15.0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.account_circle),
-                              hintText: "Username",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(right: 290),
-                          child: Text(
-                            "Password",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(right: 15, left: 15),
-                          child: TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.lock),
-                                hintText: "Password",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20))),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(right: 247),
-                          child: Text(
-                            "Lupa Password?",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(left: 21.0),
-                                child: Text(
-                                  "Belum Punya Akun?",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Container(
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              register_page()),
-                                    );
-                                  },
-                                  child: Text(
-                                    "DAFTAR",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(200, 38),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: Text(
-                                  'LOGIN',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          child: Text("-------- atau --------"),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              FloatingActionButton(
-                                backgroundColor: Colors.white,
-                                child:
-                                    SvgPicture.asset("assets/img/google.svg"),
-                                onPressed: () => {},
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (BuildContext context) => Dashboard()));
+                    },
+                    child: Text(
+                      "Forgot Password ?",
+                      style: GoogleFonts.dmSans(
+                          color: Color.fromRGBO(12, 26, 48, 100),
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.43,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (BuildContext context) => Dashboard()));
+                    },
+                    child: Text(
+                      "Sign Up",
+                      style: GoogleFonts.dmSans(
+                          color: Color.fromRGBO(54, 105, 201, 100),
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
-              ),
-            ),
+              )
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
