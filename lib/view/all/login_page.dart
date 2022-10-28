@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/view/all/dash.dart';
 import 'package:ijen_batik/view/all/register_page.dart';
+import 'package:ijen_batik/view/all/reset_password.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -12,6 +13,7 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  bool _isObscure = true;
   bool isActivate = false;
   TextEditingController? passwordController;
   TextEditingController? emailController;
@@ -121,8 +123,8 @@ class _loginState extends State<login> {
                   height: 45,
                   child: TextField(
                     controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
+                    obscureText: _isObscure,
+                    decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(246, 246, 246, 100),
                       border: OutlineInputBorder(
@@ -134,6 +136,17 @@ class _loginState extends State<login> {
                       hintText: "Masukkan Kata Sandi Akun",
                       hintStyle: TextStyle(
                         color: Color.fromRGBO(196, 197, 196, 100),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          size: 20,
+                        ),
                       ),
                     ),
                     style: TextStyle(
@@ -173,10 +186,10 @@ class _loginState extends State<login> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (BuildContext context) => Dashboard()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => resetPass()));
                     },
                     child: Text(
                       "Forgot Password ?",
