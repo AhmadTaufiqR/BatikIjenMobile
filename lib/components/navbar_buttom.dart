@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ijen_batik/view/all/dash.dart';
-import 'package:ijen_batik/view/all/login_page.dart';
-import 'package:ijen_batik/view/all/register_page.dart';
-import 'package:ijen_batik/view/all/splash_screen.dart';
+import 'package:ijen_batik/view/dash.dart';
+import 'package:ijen_batik/view/login_page.dart';
 
 class navbar_bottom extends StatefulWidget {
   const navbar_bottom({super.key});

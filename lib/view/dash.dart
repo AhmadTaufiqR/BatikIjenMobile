@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/view/all/login_page.dart';
-import 'package:ijen_batik/view/components/autocomplite.dart';
-import 'package:ijen_batik/view/components/categories.dart';
+import 'package:ijen_batik/components/autocomplite.dart';
+import 'package:ijen_batik/components/card.dart';
+import 'package:ijen_batik/components/categories.dart';
+import 'package:ijen_batik/components/navbar_top.dart';
+import 'package:ijen_batik/view/login_page.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -31,43 +33,10 @@ class _DashboardState extends State<Dashboard> {
             parent: AlwaysScrollableScrollPhysics()),
         child: Column(
           children: [
-            Stack(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      height: 80,
-                      decoration: BoxDecoration(color: Colors.white),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 28, left: 10),
-                      child: Image.asset(
-                        "assets/logo/1.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      padding: EdgeInsets.only(top: 25, right: 30),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                          "assets/logo/2.png",
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 25, right: 27),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                          "assets/logo/keranjang.png",
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            navbar_atas(
+              img: "assets/logo/1.png",
+              img1: "assets/logo/2.png",
+              img2: "assets/logo/keranjang.png",
             ),
             SizedBox(
               height: 20,
@@ -91,14 +60,17 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   Spacer(),
-                  InkWell(
-                    onTap: () {}, //TO DO: belum dinavigate
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => login()));
+                    },
                     child: Text(
                       "See All",
                       style:
                           GoogleFonts.dmSans(fontSize: 16, color: Colors.blue),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -109,25 +81,48 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 15, left: 15),
-              child: Row(
+            Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                color: Color.fromRGBO(250, 250, 250, 100),
+              ),
+              child: Column(
                 children: [
-                  Container(
-                    child: Text(
-                      "Recomendasi",
-                      style: GoogleFonts.dmSans(fontSize: 16),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 15, left: 15, top: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Text(
+                            "Recomendasi",
+                            style: GoogleFonts.dmSans(fontSize: 16),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => login()));
+                          },
+                          child: Text(
+                            "See All",
+                            style: GoogleFonts.dmSans(
+                                fontSize: 16, color: Colors.blue),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  Spacer(),
-                  InkWell(
-                    onTap: () {}, //TO DO: belum dinavigate
-                    child: Text(
-                      "See All",
-                      style:
-                          GoogleFonts.dmSans(fontSize: 16, color: Colors.blue),
-                    ),
+                  SizedBox(
+                    height: 20,
                   ),
+                  listcard(),
                 ],
               ),
             ),
