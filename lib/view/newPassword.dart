@@ -1,27 +1,28 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/view/all/login_page.dart';
+import 'package:ijen_batik/view/login_page.dart';
 
-class UserProfile extends StatefulWidget {
-  const UserProfile({super.key});
+class newPass extends StatefulWidget {
+  const newPass({super.key});
 
   @override
-  State<UserProfile> createState() => _UserProfileState();
+  State<newPass> createState() => _newPassState();
 }
 
-class _UserProfileState extends State<UserProfile> {
+class _newPassState extends State<newPass> {
   bool _isObscure = true;
+  bool isObscure = true;
   bool isActivate = false;
   TextEditingController? passwordController;
-  TextEditingController? emailController;
+  TextEditingController? newpassController;
 
   @override
   void initState() {
     super.initState();
 
     passwordController = TextEditingController();
-    emailController = TextEditingController();
-    if (emailController != null) {
+    newpassController = TextEditingController();
+    if (newpassController != null) {
       passwordController!.addListener(
         () {
           final isActivate = passwordController!.text.isNotEmpty;
@@ -51,7 +52,7 @@ class _UserProfileState extends State<UserProfile> {
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.18),
                 child: Text(
-                  "Profile & Password",
+                  "Update Password",
                   style: GoogleFonts.dmSans(
                       fontWeight: FontWeight.bold, fontSize: 25),
                 ),
@@ -70,43 +71,7 @@ class _UserProfileState extends State<UserProfile> {
                 height: 50,
               ),
               Text(
-                "Full Name",
-                style: GoogleFonts.dmSans(
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 25),
-                child: SizedBox(
-                  height: 45,
-                  child: TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromRGBO(246, 246, 246, 100),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          borderSide: BorderSide.none,
-                        ),
-                        hintText: "Masukkan Nama Lengkap Anda",
-                        hintStyle: TextStyle(
-                            color: Color.fromRGBO(196, 197, 196, 100))),
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                "Password",
+                "New Password",
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                 ),
@@ -163,12 +128,62 @@ class _UserProfileState extends State<UserProfile> {
                     color: Color.fromRGBO(131, 133, 137, 100),
                   ),
                   Text(
-                    " Kata Sandi Harus Lebih Dari 6 Karakter",
+                    " Kata Sandi Harus 6 Karakter Atau Lebih",
                     style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: Color.fromRGBO(131, 133, 137, 100)),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                "Confirm New Password",
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25),
+                child: SizedBox(
+                  height: 45,
+                  child: TextField(
+                    controller: newpassController,
+                    obscureText: isObscure,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromRGBO(246, 246, 246, 100),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: "Masukkan Kata Sandi Akun",
+                      hintStyle: TextStyle(
+                        color: Color.fromRGBO(196, 197, 196, 100),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isObscure = !isObscure;
+                          });
+                        },
+                        icon: Icon(
+                          isObscure ? Icons.visibility : Icons.visibility_off,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
@@ -184,17 +199,15 @@ class _UserProfileState extends State<UserProfile> {
                   onPressed: isActivate
                       ? () {
                           setState(() => isActivate = false);
-                          passwordController!.clear();
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) => const login(),
-                            ),
+                                builder: (BuildContext context) => login()),
                           );
                         }
                       : null,
                   child: Text(
-                    "Continue",
+                    "Save Password",
                     style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),

@@ -1,9 +1,8 @@
 import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/view/all/dash.dart';
-import 'package:ijen_batik/view/all/register_page.dart';
-import 'package:ijen_batik/view/all/reset_password.dart';
+import 'package:ijen_batik/view/register_page.dart';
+import 'package:ijen_batik/view/reset_password.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -127,7 +126,7 @@ class _loginState extends State<login> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(246, 246, 246, 100),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),

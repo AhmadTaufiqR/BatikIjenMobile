@@ -1,12 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/view/all/dash.dart';
-import 'package:ijen_batik/view/all/login_page.dart';
-import 'package:ijen_batik/view/all/newPassword.dart';
-import 'package:ijen_batik/view/all/userprofile.dart';
-import 'package:ijen_batik/view/components/background.dart';
+import 'package:ijen_batik/components/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ijen_batik/view/newPassword.dart';
 
 class resetPass extends StatefulWidget {
   @override
@@ -86,7 +83,6 @@ class _resetPassState extends State<resetPass> {
                   height: 45,
                   child: TextField(
                     controller: emailController,
-                    obscureText: true,
                     decoration: const InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(246, 246, 246, 100),
