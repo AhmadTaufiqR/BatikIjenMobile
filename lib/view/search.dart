@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/components/autocomplite.dart';
 import 'package:ijen_batik/components/navbar_top.dart';
 import 'package:ijen_batik/view/dash.dart';
 
@@ -26,7 +27,12 @@ class _SearchPageState extends State<SearchPage> {
                     Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dashboard()));
+                        },
                         child: SvgPicture.asset('assets/icon/arrowback.svg'),
                       ),
                     ),
@@ -40,9 +46,13 @@ class _SearchPageState extends State<SearchPage> {
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
+              autocom(),
             ],
           ),
         ),
