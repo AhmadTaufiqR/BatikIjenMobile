@@ -3,7 +3,9 @@ import 'package:ijen_batik/models/category.dart';
 import 'package:ijen_batik/components/categories.dart';
 import 'package:ijen_batik/components/navbar_buttom.dart';
 import 'package:ijen_batik/view/dash.dart';
+import 'package:ijen_batik/view/detailProduct.dart';
 import 'package:ijen_batik/view/page_view.dart';
+import 'package:ijen_batik/view/productListCategory.dart';
 import 'package:ijen_batik/view/product_list_search.dart';
 import 'package:ijen_batik/view/search.dart';
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Color.fromARGB(255, 169, 147, 147)),
       debugShowCheckedModeBanner: false,
-      home: SearchPage(),
+      home: ProductView(),
     );
   }
 }
