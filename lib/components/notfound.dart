@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProductList extends StatefulWidget {
-  const ProductList({Key? key}) : super(key: key);
+class searchNotFound extends StatefulWidget {
+  const searchNotFound({Key? key}) : super(key: key);
 
   @override
-  State<ProductList> createState() => _ProductListState();
+  State<searchNotFound> createState() => searchNotFoundState();
 }
 
-class _ProductListState extends State<ProductList> {
+class searchNotFoundState extends State<searchNotFound> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

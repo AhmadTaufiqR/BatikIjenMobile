@@ -20,37 +20,57 @@ class _SearchPageState extends State<SearchPage> {
         child: Container(
           child: Column(
             children: [
+              Container(
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                      blurRadius: 5,
+                      blurStyle: BlurStyle.normal,
+                      color: Colors.black12,
+                      spreadRadius: 70)
+                ]),
+              ),
+              Stack(
+                children: [
+                  Container(
+                    height: 70,
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 17),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Dashboard()));
+                              },
+                              child:
+                                  SvgPicture.asset('assets/icon/arrowback.svg'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 150,
+                          ),
+                          Container(
+                            child: Text(
+                              "Search",
+                              style: GoogleFonts.dmSans(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(
-                height: 80.0,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Dashboard()));
-                        },
-                        child: SvgPicture.asset('assets/icon/arrowback.svg'),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                    ),
-                    Container(
-                      child: Text(
-                        "Search",
-                        style: GoogleFonts.dmSans(
-                            fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
+                height: 15,
               ),
               autocom(),
             ],
