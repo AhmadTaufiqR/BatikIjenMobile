@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/service/service.dart';
+import 'package:ijen_batik/view/dash.dart';
 import 'package:ijen_batik/view/register_page.dart';
 import 'package:ijen_batik/view/reset_password.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -13,21 +18,21 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  GetxSnippet snip = GetxSnippet();
   bool _isObscure = true;
   bool isActivate = false;
-  TextEditingController? passwordController;
-  TextEditingController? emailController;
+  bool visible = false;
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    passwordController = TextEditingController();
-    emailController = TextEditingController();
-    if (emailController != null) {
-      passwordController!.addListener(
+    if (usernameController != null) {
+      passwordController.addListener(
         () {
-          final isActivate = passwordController!.text.isNotEmpty;
+          final isActivate = passwordController.text.isNotEmpty;
           setState(() => this.isActivate = isActivate);
         },
       );
@@ -36,7 +41,7 @@ class _loginState extends State<login> {
 
   @override
   void dispose() {
-    passwordController!.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -73,7 +78,7 @@ class _loginState extends State<login> {
                 height: 50,
               ),
               Text(
-                "Email/ Phone",
+                "Username",
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                 ),
@@ -86,7 +91,7 @@ class _loginState extends State<login> {
                 child: SizedBox(
                   height: 45,
                   child: TextField(
-                    controller: emailController,
+                    controller: usernameController,
                     decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(246, 246, 246, 100),
@@ -166,12 +171,10 @@ class _loginState extends State<login> {
                       onSurface: Color.fromRGBO(54, 105, 201, 100),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
-                  onPressed: isActivate
-                      ? () {
-                          setState(() => isActivate = false);
-                          passwordController!.clear();
-                        }
-                      : null,
+                  onPressed: () {
+                    snip.signIn(
+                        usernameController.text, passwordController.text);
+                  },
                   child: Text(
                     "Sign In",
                     style: GoogleFonts.dmSans(
