@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/models/getArgumen.dart';
 import 'package:ijen_batik/view/login_page.dart';
 import 'package:ijen_batik/view/userprofile.dart';
 
@@ -11,18 +13,18 @@ class register_page extends StatefulWidget {
 
 class _register_pageState extends State<register_page> {
   bool isActivate = false;
-  TextEditingController? emailController;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
     emailController = TextEditingController();
-    emailController = TextEditingController();
     if (emailController != null) {
-      emailController!.addListener(
+      emailController.addListener(
         () {
-          final isActivate = emailController!.text.isNotEmpty;
+          final isActivate = emailController.text.isNotEmpty;
           setState(() => this.isActivate = isActivate);
         },
       );
@@ -31,7 +33,7 @@ class _register_pageState extends State<register_page> {
 
   @override
   void dispose() {
-    emailController!.dispose();
+    emailController.dispose();
     super.dispose();
   }
 
@@ -68,7 +70,7 @@ class _register_pageState extends State<register_page> {
                 height: 50,
               ),
               Text(
-                "Email/ Phone",
+                "Email",
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                 ),
@@ -91,7 +93,7 @@ class _register_pageState extends State<register_page> {
                         ),
                         borderSide: BorderSide.none,
                       ),
-                      hintText: "Masukkan Alamat Email/ No Telepon Anda",
+                      hintText: "Masukkan Alamat Email Anda",
                       hintStyle: TextStyle(
                         color: Color.fromRGBO(196, 197, 196, 100),
                       ),
@@ -103,7 +105,45 @@ class _register_pageState extends State<register_page> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.35,
+                height: 20,
+              ),
+              Text(
+                "Username",
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25),
+                child: SizedBox(
+                  height: 45,
+                  child: TextField(
+                    controller: usernameController,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromRGBO(246, 246, 246, 100),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: "Masukkan Username Anda",
+                      hintStyle: TextStyle(
+                        color: Color.fromRGBO(196, 197, 196, 100),
+                      ),
+                    ),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.23,
               ),
               Container(
                 width: 340,
@@ -118,12 +158,9 @@ class _register_pageState extends State<register_page> {
                   onPressed: isActivate
                       ? () {
                           setState(() => isActivate = false);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => UserProfile(),
-                            ),
-                          );
+                          Get.toNamed("/profile",
+                              arguments: getargu(usernameController.text,
+                                  emailController.text));
                         }
                       : null,
                   child: Text(
@@ -152,11 +189,7 @@ class _register_pageState extends State<register_page> {
                         text: 'Sign In',
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const login()));
+                            Get.toNamed('/login');
                           },
                         style: GoogleFonts.dmSans(
                             color: Color.fromRGBO(54, 105, 201, 100),

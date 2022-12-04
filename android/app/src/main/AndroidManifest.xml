@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ijen_batik">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="ijen_batik"
         android:name="${applicationName}"

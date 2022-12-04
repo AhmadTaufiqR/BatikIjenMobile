@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/models/getArgumen.dart';
+import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/login_page.dart';
 
 class UserProfile extends StatefulWidget {
@@ -10,35 +13,15 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  GetxSnippet snip = GetxSnippet();
   bool _isObscure = true;
-  bool isActivate = false;
-  TextEditingController? passwordController;
-  TextEditingController? emailController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    passwordController = TextEditingController();
-    emailController = TextEditingController();
-    if (emailController != null) {
-      passwordController!.addListener(
-        () {
-          final isActivate = passwordController!.text.isNotEmpty;
-          setState(() => this.isActivate = isActivate);
-        },
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    passwordController!.dispose();
-    super.dispose();
-  }
+  TextEditingController passwordC = TextEditingController();
+  TextEditingController fullnameC = TextEditingController();
+  TextEditingController teleponC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as getargu;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -83,7 +66,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: SizedBox(
                   height: 45,
                   child: TextField(
-                    controller: emailController,
+                    controller: fullnameC,
                     decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color.fromRGBO(246, 246, 246, 100),
@@ -119,7 +102,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: SizedBox(
                   height: 45,
                   child: TextField(
-                    controller: passwordController,
+                    controller: passwordC,
                     obscureText: _isObscure,
                     decoration: InputDecoration(
                       filled: true,
@@ -171,7 +154,44 @@ class _UserProfileState extends State<UserProfile> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: 30,
+              ),
+              Text(
+                "No Telephone",
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25),
+                child: SizedBox(
+                  height: 45,
+                  child: TextField(
+                    maxLength: 13,
+                    controller: teleponC,
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(246, 246, 246, 100),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: "Masukkan No Telephone Anda",
+                        hintStyle: TextStyle(
+                            color: Color.fromRGBO(196, 197, 196, 100))),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
               ),
               Container(
                 width: 340,
@@ -181,24 +201,19 @@ class _UserProfileState extends State<UserProfile> {
                       onSurface: Color.fromRGBO(54, 105, 201, 100),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
-                  onPressed: isActivate
-                      ? () {
-                          setState(() => isActivate = false);
-                          passwordController!.clear();
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => const login(),
-                            ),
-                          );
-                        }
-                      : null,
+                  onPressed: () {
+                    snip.SignUp(args.text1!, passwordC.text, args.text2!,
+                        fullnameC.text, teleponC.text);
+                  },
                   child: Text(
                     "Continue",
                     style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
             ],
           ),
