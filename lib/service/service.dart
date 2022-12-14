@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +12,7 @@ class GetxSnippet extends GetxController {
     return json.decode(response.body);
   }
 
-  signIn(String username, String pass) async {
+  signIn(String username, String pass, dynamic context) async {
     Map data = {
       'username': username,
       'password': pass,
@@ -19,27 +20,38 @@ class GetxSnippet extends GetxController {
     var respons =
         await http.post(Uri.parse("http://10.0.2.2/api/login.php"), body: data);
     var uji = jsonEncode(jsonDecode(respons.body));
-    print(respons.body);
-
+    final Map<String, dynamic> datalog = json.decode(respons.body);
+    var nametag = datalog['user_list'][0]['nama_lengkap'];
+    // print(respons.body);
     if (uji.contains('Sukses')) {
-      Get.snackbar("Success", "Your Request is Success",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.green);
-      Get.toNamed('/dashAfter');
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.leftSlide,
+        headerAnimationLoop: true,
+        dialogType: DialogType.success,
+        title: 'Succes',
+        desc: 'Anda Berhasil Login',
+        btnOkOnPress: () {
+          Get.toNamed('/myScreen', arguments: nametag);
+        },
+        onDismissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },
+      ).show();
     } else if (uji.contains('Username_salah')) {
       Get.snackbar("Error", "Username Yang Anda Masukkan Salah",
           snackPosition: SnackPosition.BOTTOM,
           colorText: Colors.white,
-          backgroundColor: Colors.redAccent);
+          backgroundColor: Colors.red);
     } else if (uji.contains('Password_salah')) {
       Get.snackbar("Error", "Password Yang Anda Masukkan Salah",
           snackPosition: SnackPosition.BOTTOM,
           colorText: Colors.white,
-          backgroundColor: Colors.redAccent);
+          backgroundColor: Colors.red);
     }
   }
 
+  // ignore: non_constant_identifier_names
   SignUp(String user, pass, email, full, telepon) async {
     Map data = {
       'username': user,
@@ -64,12 +76,12 @@ class GetxSnippet extends GetxController {
           "Email Telah Terdaftar, Silahkan Masukkan Kembali Email Anda",
           snackPosition: SnackPosition.BOTTOM,
           colorText: Colors.white,
-          backgroundColor: Colors.redAccent);
+          backgroundColor: Colors.red);
     } else if (uji.contains('REGISTER_ERROR')) {
       Get.snackbar("Error", "Silahkan Isi Kembali Data Anda",
           snackPosition: SnackPosition.BOTTOM,
           colorText: Colors.white,
-          backgroundColor: Colors.redAccent);
+          backgroundColor: Colors.red);
     }
   }
 }

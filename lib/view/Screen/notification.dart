@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class searchNotFound extends StatefulWidget {
-  const searchNotFound({Key? key}) : super(key: key);
+class notificationScreen extends StatefulWidget {
+  const notificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<searchNotFound> createState() => searchNotFoundState();
+  State<notificationScreen> createState() => _notificationScreenState();
 }
 
-class searchNotFoundState extends State<searchNotFound> {
+class _notificationScreenState extends State<notificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
+        title: const Text("Notification"),
         actions: const [],
       ),
       body: SingleChildScrollView(
