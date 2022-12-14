@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/models/getArgumen.dart';
-import 'package:ijen_batik/view/login_page.dart';
-import 'package:ijen_batik/view/userprofile.dart';
 
 class register_page extends StatefulWidget {
   @override
@@ -56,7 +54,7 @@ class _register_pageState extends State<register_page> {
                       fontWeight: FontWeight.bold, fontSize: 25),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -64,9 +62,9 @@ class _register_pageState extends State<register_page> {
                 style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
-                    color: Color.fromRGBO(131, 133, 137, 100)),
+                    color: const Color.fromRGBO(131, 133, 137, 100)),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Text(
@@ -79,7 +77,7 @@ class _register_pageState extends State<register_page> {
                 height: 15,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 25),
+                padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
                   child: TextField(
@@ -98,13 +96,13 @@ class _register_pageState extends State<register_page> {
                         color: Color.fromRGBO(196, 197, 196, 100),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -117,7 +115,7 @@ class _register_pageState extends State<register_page> {
                 height: 15,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 25),
+                padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
                   child: TextField(
@@ -136,7 +134,7 @@ class _register_pageState extends State<register_page> {
                         color: Color.fromRGBO(196, 197, 196, 100),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
@@ -150,7 +148,7 @@ class _register_pageState extends State<register_page> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    onSurface: Color.fromRGBO(54, 105, 201, 100),
+                    onSurface: const Color.fromRGBO(54, 105, 201, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -170,18 +168,18 @@ class _register_pageState extends State<register_page> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 75,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 82),
+                padding: const EdgeInsets.only(left: 82),
                 child: Text.rich(
                   TextSpan(
                     children: [
                       TextSpan(
                         text: 'Have An Account ? ',
                         style: GoogleFonts.dmSans(
-                            color: Color.fromRGBO(12, 26, 48, 100),
+                            color: const Color.fromRGBO(12, 26, 48, 100),
                             fontSize: 14,
                             fontWeight: FontWeight.bold),
                       ),
@@ -192,7 +190,7 @@ class _register_pageState extends State<register_page> {
                             Get.toNamed('/login');
                           },
                         style: GoogleFonts.dmSans(
-                            color: Color.fromRGBO(54, 105, 201, 100),
+                            color: const Color.fromRGBO(54, 105, 201, 100),
                             fontSize: 14,
                             fontWeight: FontWeight.bold),
                       )

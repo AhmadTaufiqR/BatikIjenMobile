@@ -1,14 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/service/service.dart';
-import 'package:ijen_batik/view/dash.dart';
-import 'package:ijen_batik/view/register_page.dart';
-import 'package:ijen_batik/view/reset_password.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ijen_batik/view/Screen/register_page.dart';
+import 'package:ijen_batik/view/Screen/reset_password.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -24,20 +20,6 @@ class _loginState extends State<login> {
   bool visible = false;
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (usernameController != null) {
-      passwordController.addListener(
-        () {
-          final isActivate = passwordController.text.isNotEmpty;
-          setState(() => this.isActivate = isActivate);
-        },
-      );
-    }
-  }
 
   @override
   void dispose() {
@@ -64,7 +46,7 @@ class _loginState extends State<login> {
                       fontWeight: FontWeight.bold, fontSize: 25),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -72,9 +54,9 @@ class _loginState extends State<login> {
                 style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
-                    color: Color.fromRGBO(131, 133, 137, 100)),
+                    color: const Color.fromRGBO(131, 133, 137, 100)),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Text(
@@ -87,7 +69,7 @@ class _loginState extends State<login> {
                 height: 15,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 25),
+                padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
                   child: TextField(
@@ -104,13 +86,13 @@ class _loginState extends State<login> {
                         hintText: "Masukkan Alamat Email/ No Telepon Anda",
                         hintStyle: TextStyle(
                             color: Color.fromRGBO(196, 197, 196, 100))),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Text(
@@ -123,7 +105,7 @@ class _loginState extends State<login> {
                 height: 15,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 25),
+                padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
                   child: TextField(
@@ -131,7 +113,7 @@ class _loginState extends State<login> {
                     obscureText: _isObscure,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color.fromRGBO(246, 246, 246, 100),
+                      fillColor: const Color.fromRGBO(246, 246, 246, 100),
                       border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
@@ -139,7 +121,7 @@ class _loginState extends State<login> {
                         borderSide: BorderSide.none,
                       ),
                       hintText: "Masukkan Kata Sandi Akun",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Color.fromRGBO(196, 197, 196, 100),
                       ),
                       suffixIcon: IconButton(
@@ -154,13 +136,13 @@ class _loginState extends State<login> {
                         ),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Container(
@@ -168,12 +150,12 @@ class _loginState extends State<login> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      onSurface: Color.fromRGBO(54, 105, 201, 100),
+                      onSurface: const Color.fromRGBO(54, 105, 201, 100),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {
-                    snip.signIn(
-                        usernameController.text, passwordController.text);
+                    snip.signIn(usernameController.text,
+                        passwordController.text, context);
                   },
                   child: Text(
                     "Sign In",
@@ -182,7 +164,7 @@ class _loginState extends State<login> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Row(
@@ -197,7 +179,7 @@ class _loginState extends State<login> {
                     child: Text(
                       "Forgot Password ?",
                       style: GoogleFonts.dmSans(
-                          color: Color.fromRGBO(12, 26, 48, 100),
+                          color: const Color.fromRGBO(12, 26, 48, 100),
                           fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -215,7 +197,7 @@ class _loginState extends State<login> {
                     child: Text(
                       "Sign Up",
                       style: GoogleFonts.dmSans(
-                          color: Color.fromRGBO(54, 105, 201, 100),
+                          color: const Color.fromRGBO(54, 105, 201, 100),
                           fontWeight: FontWeight.w600),
                     ),
                   ),

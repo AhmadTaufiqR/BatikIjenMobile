@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/components/autocomplite.dart';
-import 'package:ijen_batik/components/navbar_top.dart';
-import 'package:ijen_batik/view/dash.dart';
+import 'package:ijen_batik/service/service.dart';
+import 'package:ijen_batik/view/Screen/dash.dart';
+import 'package:ijen_batik/view/widget/autocom.dart';
+import 'package:ijen_batik/view/widget/card.dart';
 
 class ProductListCategory extends StatefulWidget {
   const ProductListCategory({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class ProductListCategory extends StatefulWidget {
 }
 
 class _ProductListCategoryState extends State<ProductListCategory> {
+  GetxSnippet snip = GetxSnippet();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +23,11 @@ class _ProductListCategoryState extends State<ProductListCategory> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Stack(
                   children: [
                     Container(
-                      decoration: BoxDecoration(boxShadow: [
+                      decoration: const BoxDecoration(boxShadow: [
                         BoxShadow(
                             blurRadius: 5,
                             blurStyle: BlurStyle.normal,
@@ -35,19 +37,20 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                     ),
                     Container(
                       height: 80,
-                      decoration: BoxDecoration(color: Colors.white),
+                      decoration: const BoxDecoration(color: Colors.white),
                       child: Padding(
                         padding: const EdgeInsets.only(top: 17),
                         child: Row(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(left: 15),
+                              padding: const EdgeInsets.only(left: 15),
                               child: InkWell(
                                 onTap: () {
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Dashboard()));
+                                          builder: (context) =>
+                                              const Dashboard()));
                                 },
                                 child: SvgPicture.asset(
                                     'assets/icon/arrowback.svg'),
@@ -68,7 +71,8 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Dashboard()));
+                                        builder: (context) =>
+                                            const Dashboard()));
                               },
                               child: SvgPicture.asset('assets/icon/vector.svg'),
                             ),
@@ -78,7 +82,7 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Padding(
@@ -87,75 +91,42 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                       style: GoogleFonts.dmSans(
                           fontSize: 24, fontWeight: FontWeight.bold)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
-                autocom(),
-                SizedBox(
-                  height: 25,
-                ),
+                const autocom(),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            height: 230,
-                            width: 185,
-                            child: Card(
-                              color: Colors.blue,
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            height: 230,
-                            width: 185,
-                            child: Card(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 230,
-                            width: 185,
-                            child: Card(
-                              color: Colors.blue,
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            height: 230,
-                            width: 185,
-                            child: Card(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 230,
-                            width: 185,
-                            child: Card(
-                              color: Colors.blue,
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            height: 230,
-                            width: 185,
-                            child: Card(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
+                  child: FutureBuilder(
+                    future: snip.allproduct(),
+                    initialData: [],
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) print(snapshot.error);
+                      List data = snapshot.data;
+                      return snapshot.hasData
+                          ? GridView.builder(
+                              shrinkWrap: true,
+                              physics: const ScrollPhysics(),
+                              gridDelegate:
+                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent: 290,
+                                      childAspectRatio: 0.65,
+                                      crossAxisSpacing: 3,
+                                      mainAxisSpacing: 3),
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                return Cardvalue(
+                                  title: data[index]['nama_produk'],
+                                  img:
+                                      "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
+                                  harga: data[index]['harga_produk'],
+                                );
+                              },
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                    },
                   ),
                 )
               ],
@@ -166,9 +137,11 @@ class _ProductListCategoryState extends State<ProductListCategory> {
           height: 70,
           padding: const EdgeInsets.all(8.0),
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              snip.allproduct();
+            },
             style: OutlinedButton.styleFrom(
-                side: BorderSide(),
+                side: const BorderSide(),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10))),
             child: Text(

@@ -1,9 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/components/background.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ijen_batik/view/newPassword.dart';
+import 'package:ijen_batik/view/Screen/newPassword.dart';
 
 class resetPass extends StatefulWidget {
   @override
@@ -55,7 +52,7 @@ class _resetPassState extends State<resetPass> {
                       fontWeight: FontWeight.bold, fontSize: 25),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -63,9 +60,9 @@ class _resetPassState extends State<resetPass> {
                 style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
-                    color: Color.fromRGBO(131, 133, 137, 100)),
+                    color: const Color.fromRGBO(131, 133, 137, 100)),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Text(
@@ -78,7 +75,7 @@ class _resetPassState extends State<resetPass> {
                 height: 15,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 25),
+                padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
                   child: TextField(
@@ -97,7 +94,7 @@ class _resetPassState extends State<resetPass> {
                         color: Color.fromRGBO(196, 197, 196, 100),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
@@ -111,7 +108,7 @@ class _resetPassState extends State<resetPass> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    onSurface: Color.fromRGBO(54, 105, 201, 100),
+                    onSurface: const Color.fromRGBO(54, 105, 201, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -122,7 +119,8 @@ class _resetPassState extends State<resetPass> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) => newPass(),
+                              builder: (BuildContext context) =>
+                                  const newPass(),
                             ),
                           );
                         }
