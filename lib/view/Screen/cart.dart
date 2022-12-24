@@ -11,12 +11,11 @@ class PageCart extends StatefulWidget {
 class _PageCartState extends State<PageCart> {
   List<Map<String, dynamic>> listData = [];
   var inc = 0;
-  @override
   void refresh() async {
     var data = await SQLHelper.getItems();
     setState(() {
       listData = data;
-      print(listData);
+      // print(listData);
     });
   }
 
