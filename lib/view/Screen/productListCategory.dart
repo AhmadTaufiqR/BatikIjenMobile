@@ -120,6 +120,8 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                                   img:
                                       "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
                                   harga: data[index]['harga_produk'],
+                                  data: data[index],
+                                  desc: data[index]['rincian_produk'],
                                 );
                               },
                             )

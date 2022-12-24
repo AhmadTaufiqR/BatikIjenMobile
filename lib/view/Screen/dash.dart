@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
@@ -69,10 +70,7 @@ class _DashboardState extends State<Dashboard> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const login()));
+                        Get.toNamed("/category");
                       },
                       child: Text(
                         "See All",
@@ -105,10 +103,7 @@ class _DashboardState extends State<Dashboard> {
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const login()));
+                              Get.toNamed("/rekomendasi");
                             },
                             child: Text(
                               "See All",

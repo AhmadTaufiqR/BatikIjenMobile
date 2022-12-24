@@ -140,10 +140,7 @@ class _DashboardAfterState extends State<DashboardAfter> {
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const login()));
+                              Get.toNamed("/rekomendasi");
                             },
                             child: Text(
                               "See All",
