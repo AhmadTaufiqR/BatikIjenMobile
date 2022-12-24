@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ijen_batik/service/sqlhalper.dart';
 
 class orderProduct extends StatefulWidget {
   const orderProduct({Key? key}) : super(key: key);
@@ -12,16 +13,8 @@ class _orderProductState extends State<orderProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
+        title: const Text("Order"),
         actions: const [],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [],
-          ),
-        ),
       ),
     );
   }
