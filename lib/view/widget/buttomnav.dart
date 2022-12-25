@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ijen_batik/view/Screen/Order.dart';
 import 'package:ijen_batik/view/Screen/dash.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
@@ -16,10 +15,10 @@ class _NavBottomState extends State<NavBottom> {
   int _selectedIndex = 0;
 
   var Screen = [
-    Dashboard(),
-    orderProduct(),
-    notificationScreen(),
-    login(),
+    const Dashboard(),
+    const orderProduct(),
+    const notificationScreen(),
+    const login(),
   ];
 
   @override

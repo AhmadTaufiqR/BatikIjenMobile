@@ -103,7 +103,7 @@ class _resetPassState extends State<resetPass> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(

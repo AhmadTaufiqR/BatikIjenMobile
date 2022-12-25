@@ -188,7 +188,7 @@ class _newPassState extends State<newPass> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(

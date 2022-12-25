@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/service/service.dart';
-import 'package:ijen_batik/view/Screen/login_page.dart';
 import 'package:ijen_batik/view/widget/autocom.dart';
-import 'package:ijen_batik/view/widget/buttomnav.dart';
 import 'package:ijen_batik/view/widget/card.dart';
 
 class Dashboard extends StatefulWidget {
@@ -118,7 +115,7 @@ class _DashboardState extends State<Dashboard> {
                       padding: const EdgeInsets.symmetric(horizontal: 7),
                       child: FutureBuilder(
                         future: snip.allproduct(),
-                        initialData: [],
+                        initialData: const [],
                         builder: (context, snapshot) {
                           if (snapshot.hasError) print(snapshot.error);
                           List data = snapshot.data;
@@ -139,10 +136,12 @@ class _DashboardState extends State<Dashboard> {
                                       img:
                                           "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
                                       harga: data[index]['harga_produk'],
+                                      data: data[index],
+                                      desc: data[index]['rincian_produk'],
                                     );
                                   },
                                 )
-                              : Center(
+                              : const Center(
                                   child: CircularProgressIndicator(),
                                 );
                         },

@@ -5,7 +5,7 @@ import 'package:ijen_batik/service/sqlhalper.dart';
 
 class ProductView extends StatefulWidget {
   final Map? data1;
-  ProductView({Key? key, this.data1}) : super(key: key);
+  const ProductView({Key? key, this.data1}) : super(key: key);
 
   @override
   State<ProductView> createState() => _ProductViewState();
@@ -22,6 +22,11 @@ class _ProductViewState extends State<ProductView> {
   Future<void> additems() async {
     await SQLHelper.createItem(datas!['nama_produk'], datas!['gambar_produk'],
         datas!['harga_produk'], datas!['id_produk']);
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Successfully deleted a journal!'),
+    ));
+    // print(datas);
   }
 
   @override
@@ -47,7 +52,9 @@ class _ProductViewState extends State<ProductView> {
               ),
               InkWell(
                 child: Image.asset('assets/logo/keranjang.png'),
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed('/cart');
+                },
               )
             ],
           )
@@ -92,7 +99,7 @@ class _ProductViewState extends State<ProductView> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               // Flexible(
@@ -114,7 +121,7 @@ class _ProductViewState extends State<ProductView> {
                       style: GoogleFonts.dmSans(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text("${datas!['rincian_produk']}"),

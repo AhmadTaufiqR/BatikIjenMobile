@@ -37,15 +37,15 @@ class _autocomState extends State<autocom> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
                   labelText: 'Search',
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     color: Colors.blueGrey,
                   ),
-                  suffixIcon: Icon(
+                  suffixIcon: const Icon(
                     Icons.search,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.blueGrey,
                     ),
                   ),

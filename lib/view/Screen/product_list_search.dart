@@ -18,7 +18,7 @@ class _ProductListSearchState extends State<ProductListSearch> {
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            children: [],
+            children: const [],
           ),
         ),
       ),

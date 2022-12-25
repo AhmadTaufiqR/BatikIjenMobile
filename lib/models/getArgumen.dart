@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+// ignore: camel_case_types
 class getargu {
   final String? text1;
   final String? text2;

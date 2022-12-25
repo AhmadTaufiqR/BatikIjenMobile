@@ -19,7 +19,7 @@ class _notificationScreenState extends State<notificationScreen> {
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            children: [],
+            children: const [],
           ),
         ),
       ),

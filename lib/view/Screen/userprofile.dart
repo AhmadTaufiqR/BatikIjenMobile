@@ -191,7 +191,7 @@ class _UserProfileState extends State<UserProfile> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.15,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(

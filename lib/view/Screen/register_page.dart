@@ -143,7 +143,7 @@ class _register_pageState extends State<register_page> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.23,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(

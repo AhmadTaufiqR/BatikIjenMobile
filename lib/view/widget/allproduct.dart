@@ -52,14 +52,14 @@ class allproduct extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 15),
                             child: InkWell(
                               onTap: () {
-                                Get.toNamed(back);
+                                Get.back();
                               },
                               child:
                                   SvgPicture.asset('assets/icon/arrowback.svg'),
                             ),
                           ),
                           Center(
-                            widthFactor: 4.68,
+                            widthFactor: 3.25,
                             child: Text(
                               status,
                               style: GoogleFonts.dmSans(
@@ -97,7 +97,7 @@ class allproduct extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 7),
                 child: FutureBuilder(
                   future: methodP,
-                  initialData: [],
+                  initialData: const [],
                   builder: (context, snapshot) {
                     if (snapshot.hasError) print(snapshot.error);
                     List data = snapshot.data;
@@ -118,6 +118,8 @@ class allproduct extends StatelessWidget {
                                 img:
                                     "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
                                 harga: data[index]['harga_produk'],
+                                data: data[index],
+                                desc: data[index]['rincian_produk'],
                               );
                             },
                           )

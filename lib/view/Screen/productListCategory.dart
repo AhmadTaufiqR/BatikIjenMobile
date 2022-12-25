@@ -19,54 +19,31 @@ class _ProductListCategoryState extends State<ProductListCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Stack(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(boxShadow: [
-                        BoxShadow(
-                            blurRadius: 5,
-                            blurStyle: BlurStyle.normal,
-                            color: Colors.black12,
-                            spreadRadius: 80)
-                      ]),
-                    ),
-                    Container(
-                      height: 80,
-                      decoration: const BoxDecoration(color: Colors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 17),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Dashboard()));
-                                },
-                                child: SvgPicture.asset(
-                                    'assets/icon/arrowback.svg'),
-                              ),
-                            ),
-                            Center(
-                              widthFactor: 4.68,
-                              child: Text(
-                                "Category",
-                                style: GoogleFonts.dmSans(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            InkWell(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Stack(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          blurRadius: 5,
+                          blurStyle: BlurStyle.normal,
+                          color: Colors.black12,
+                          spreadRadius: 80)
+                    ]),
+                  ),
+                  Container(
+                    height: 80,
+                    decoration: const BoxDecoration(color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 17),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: InkWell(
                               onTap: () {
                                 Navigator.pushReplacement(
                                     context,
@@ -74,65 +51,85 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                                         builder: (context) =>
                                             const Dashboard()));
                               },
-                              child: SvgPicture.asset('assets/icon/vector.svg'),
+                              child:
+                                  SvgPicture.asset('assets/icon/arrowback.svg'),
                             ),
-                          ],
-                        ),
+                          ),
+                          Center(
+                            widthFactor: 4.68,
+                            child: Text(
+                              "Category",
+                              style: GoogleFonts.dmSans(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Dashboard()));
+                            },
+                            child: SvgPicture.asset('assets/icon/vector.svg'),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 11),
-                  child: Text("Gadget",
-                      style: GoogleFonts.dmSans(
-                          fontSize: 24, fontWeight: FontWeight.bold)),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                const autocom(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 7),
-                  child: FutureBuilder(
-                    future: snip.allproduct(),
-                    initialData: [],
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) print(snapshot.error);
-                      List data = snapshot.data;
-                      return snapshot.hasData
-                          ? GridView.builder(
-                              shrinkWrap: true,
-                              physics: const ScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 290,
-                                      childAspectRatio: 0.65,
-                                      crossAxisSpacing: 3,
-                                      mainAxisSpacing: 3),
-                              itemCount: data.length,
-                              itemBuilder: (context, index) {
-                                return Cardvalue(
-                                  title: data[index]['nama_produk'],
-                                  img:
-                                      "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
-                                  harga: data[index]['harga_produk'],
-                                  data: data[index],
-                                  desc: data[index]['rincian_produk'],
-                                );
-                              },
-                            )
-                          : const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                    },
                   ),
-                )
-              ],
-            ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 11),
+                child: Text("Gadget",
+                    style: GoogleFonts.dmSans(
+                        fontSize: 24, fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              const autocom(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 7),
+                child: FutureBuilder(
+                  future: snip.allproduct(),
+                  initialData: const [],
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) print(snapshot.error);
+                    List data = snapshot.data;
+                    return snapshot.hasData
+                        ? GridView.builder(
+                            shrinkWrap: true,
+                            physics: const ScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: 290,
+                                    childAspectRatio: 0.65,
+                                    crossAxisSpacing: 3,
+                                    mainAxisSpacing: 3),
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return Cardvalue(
+                                title: data[index]['nama_produk'],
+                                img:
+                                    "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
+                                harga: data[index]['harga_produk'],
+                                data: data[index],
+                                desc: data[index]['rincian_produk'],
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                  },
+                ),
+              )
+            ],
           ),
         ),
         bottomNavigationBar: Container(
