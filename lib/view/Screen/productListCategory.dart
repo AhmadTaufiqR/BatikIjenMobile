@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,8 +52,7 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                                         builder: (context) =>
                                             const Dashboard()));
                               },
-                              child:
-                                  SvgPicture.asset('assets/icon/arrowback.svg'),
+                              child: Image.asset('assets/img/vector.png'),
                             ),
                           ),
                           Center(

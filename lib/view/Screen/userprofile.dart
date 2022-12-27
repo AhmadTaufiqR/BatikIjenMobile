@@ -17,6 +17,8 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController fullnameC = TextEditingController();
   TextEditingController teleponC = TextEditingController();
 
+  //TODO: Tambahkan Valisadi password jika tidak ada angkanya dan validasi jika text field belum diisi semua
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as getargu;

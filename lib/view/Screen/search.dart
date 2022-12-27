@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ijen_batik/view/Screen/dash.dart';
 import 'package:ijen_batik/view/widget/autocom.dart';
 
 class SearchPage extends StatefulWidget {
@@ -40,13 +38,9 @@ class _SearchPageState extends State<SearchPage> {
                           padding: const EdgeInsets.only(left: 10),
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Dashboard()));
+                              Navigator.pop(context);
                             },
-                            child:
-                                SvgPicture.asset('assets/icon/arrowback.svg'),
+                            child: Image.asset('assets/img/vector.png'),
                           ),
                         ),
                         const SizedBox(

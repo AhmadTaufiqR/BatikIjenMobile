@@ -41,8 +41,7 @@ class _ProductViewState extends State<ProductView> {
             expandedHeight: 60,
             snap: true,
             leading: InkWell(
-              child: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: Colors.black54),
+              child: Image.asset('assets/img/vector.png'),
               onTap: () => Navigator.pop(context),
             ),
             actions: <Widget>[
@@ -102,15 +101,6 @@ class _ProductViewState extends State<ProductView> {
               const SizedBox(
                 height: 10,
               ),
-              // Flexible(
-              //   child: Text(
-              //     datas!['rincian_produk'],
-              //     overflow: TextOverflow.ellipsis,
-              //     maxLines: 2,
-              //     style: GoogleFonts.dmSans(fontSize: 12),
-              //   ),
-              // ),
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

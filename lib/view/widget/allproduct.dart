@@ -9,14 +9,14 @@ import 'package:ijen_batik/view/widget/card.dart';
 
 class allproduct extends StatelessWidget {
   final String back;
-  final String status;
+  final String? status;
   final String back2;
   Future methodP;
 
   allproduct(
       {Key? key,
       required this.back,
-      required this.status,
+      this.status,
       required this.back2,
       required this.methodP})
       : super(key: key);
@@ -24,75 +24,48 @@ class allproduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            floating: true,
+            expandedHeight: 60,
+            snap: true,
+            leading: InkWell(
+              child: Image.asset('assets/img/vector.png'),
+              onTap: () => Get.back(),
+            ),
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: InkWell(
+                  child: SvgPicture.asset('assets/icon/vector.svg'),
+                  onTap: () {
+                    Get.toNamed(back2);
+                  },
+                ),
+              )
+            ],
+          )
+        ],
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Stack(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(boxShadow: [
-                      BoxShadow(
-                          blurRadius: 5,
-                          blurStyle: BlurStyle.normal,
-                          color: Colors.black12,
-                          spreadRadius: 80)
-                    ]),
-                  ),
-                  Container(
-                    height: 80,
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 17),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: InkWell(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child:
-                                  SvgPicture.asset('assets/icon/arrowback.svg'),
-                            ),
-                          ),
-                          Center(
-                            widthFactor: 3.25,
-                            child: Text(
-                              status,
-                              style: GoogleFonts.dmSans(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.toNamed(back2);
-                            },
-                            child: SvgPicture.asset('assets/icon/vector.svg'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(
                 height: 30,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 11),
-                child: Text(status,
+                child: Text(status!,
                     style: GoogleFonts.dmSans(
                         fontSize: 24, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(
                 height: 25,
               ),
-              const autocom(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7),
                 child: FutureBuilder(

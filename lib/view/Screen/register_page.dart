@@ -14,6 +14,8 @@ class _register_pageState extends State<register_page> {
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
 
+  //TODO: Jika bisa tambahkan validasi jika email sudah atau pernah didaftarkan.
+
   @override
   void initState() {
     super.initState();

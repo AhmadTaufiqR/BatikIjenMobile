@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
 import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/widget/allproduct.dart';
@@ -19,7 +17,7 @@ class _rekomendasiState extends State<rekomendasi> {
         body: allproduct(
             back: "/myScreen",
             status: "Rekomendasi",
-            back2: "/search",
+            back2: "/cart",
             methodP: snip.allproduct()));
   }
 }

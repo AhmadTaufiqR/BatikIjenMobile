@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductListSearch extends StatefulWidget {
   const ProductListSearch({Key? key}) : super(key: key);
@@ -11,17 +12,32 @@ class _ProductListSearchState extends State<ProductListSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Item"),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: const [],
-          ),
-        ),
-      ),
-    );
+        body: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  SliverAppBar(
+                    backgroundColor: Colors.white,
+                    floating: true,
+                    expandedHeight: 60,
+                    snap: true,
+                    leading: InkWell(
+                      child: Image.asset('assets/img/vector.png'),
+                      onTap: () => Navigator.pop(context),
+                    ),
+                    actions: <Widget>[
+                      InkWell(
+                        child: Image.asset('assets/logo/2.png'),
+                        onTap: () {},
+                      ),
+                      InkWell(
+                        child: Image.asset('assets/logo/keranjang.png'),
+                        onTap: () {
+                          Get.toNamed('/cart');
+                        },
+                      )
+                    ],
+                  )
+                ],
+            body: Container()));
   }
 }

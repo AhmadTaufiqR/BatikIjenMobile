@@ -48,9 +48,9 @@ class _PageCartState extends State<PageCart> {
             expandedHeight: 60,
             snap: true,
             leading: InkWell(
-                onTap: () => Get.back(),
-                child: const Icon(Icons.arrow_back_ios_new_rounded,
-                    color: Colors.black54)),
+              onTap: () => Get.back(),
+              child: Image.asset('assets/img/vector.png'),
+            ),
           )
         ],
         body: SingleChildScrollView(
