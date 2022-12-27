@@ -17,6 +17,8 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController fullnameC = TextEditingController();
   TextEditingController teleponC = TextEditingController();
 
+  //TODO: Tambahkan Valisadi password jika tidak ada angkanya dan validasi jika text field belum diisi semua
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as getargu;
@@ -191,7 +193,7 @@ class _UserProfileState extends State<UserProfile> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.15,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(

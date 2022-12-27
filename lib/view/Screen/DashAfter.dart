@@ -1,12 +1,12 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/models/categories.dart';
 import 'package:ijen_batik/service/service.dart';
-import 'package:ijen_batik/view/Screen/login_page.dart';
 import 'package:ijen_batik/view/widget/autocom.dart';
-import 'package:ijen_batik/view/widget/buttomnav.dart';
 import 'package:ijen_batik/view/widget/card.dart';
+import 'package:ijen_batik/view/widget/categories.dart';
 
 class DashboardAfter extends StatefulWidget {
   const DashboardAfter({super.key});
@@ -70,10 +70,7 @@ class _DashboardAfterState extends State<DashboardAfter> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const login()));
+                        Get.toNamed("/categories");
                       },
                       child: Text(
                         "See All",
@@ -84,39 +81,25 @@ class _DashboardAfterState extends State<DashboardAfter> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 7),
-                child: FutureBuilder(
-                  future: snip.allproduct(),
-                  initialData: [],
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) print(snapshot.error);
-                    List data = snapshot.data;
-                    return snapshot.hasData
-                        ? GridView.builder(
-                            shrinkWrap: true,
-                            physics: const ScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 290,
-                                    childAspectRatio: 0.65,
-                                    crossAxisSpacing: 3,
-                                    mainAxisSpacing: 3),
-                            itemCount: data.length,
-                            itemBuilder: (context, index) {
-                              return Cardvalue(
-                                title: data[index]['nama_produk'],
-                                img:
-                                    "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
-                                harga: data[index]['harga_produk'],
-                              );
-                            },
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          );
-                  },
+              const SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                height: 84,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) => CategoryCard(
+                    image: categories[index].icon,
+                    title: categories[index].title,
+                    press: () {},
+                  ),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 5),
                 ),
+              ),
+              const SizedBox(
+                height: 30,
               ),
               Container(
                 decoration: const BoxDecoration(
@@ -155,7 +138,7 @@ class _DashboardAfterState extends State<DashboardAfter> {
                       padding: const EdgeInsets.symmetric(horizontal: 7),
                       child: FutureBuilder(
                         future: snip.allproduct(),
-                        initialData: [],
+                        initialData: const [],
                         builder: (context, snapshot) {
                           if (snapshot.hasError) print(snapshot.error);
                           List data = snapshot.data;
@@ -176,10 +159,87 @@ class _DashboardAfterState extends State<DashboardAfter> {
                                       img:
                                           "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
                                       harga: data[index]['harga_produk'],
+                                      data: data[index],
+                                      desc: data[index]['rincian_produk'],
                                     );
                                   },
                                 )
-                              : Center(
+                              : const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  color: Color.fromRGBO(250, 250, 250, 100),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "New Product",
+                            style: GoogleFonts.dmSans(fontSize: 20),
+                          ),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed("/rekomendasi");
+                            },
+                            child: Text(
+                              "See All",
+                              style: GoogleFonts.dmSans(
+                                  fontSize: 16, color: Colors.blue),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 7),
+                      child: FutureBuilder(
+                        future: snip.allproduct(),
+                        initialData: const [],
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) print(snapshot.error);
+                          List data = snapshot.data;
+                          return snapshot.hasData
+                              ? GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const ScrollPhysics(),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 290,
+                                          childAspectRatio: 0.65,
+                                          crossAxisSpacing: 3,
+                                          mainAxisSpacing: 3),
+                                  itemCount: data.length,
+                                  itemBuilder: (context, index) {
+                                    return Cardvalue(
+                                      title: data[index]['nama_produk'],
+                                      img:
+                                          "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
+                                      harga: data[index]['harga_produk'],
+                                      data: data[index],
+                                      desc: data[index]['rincian_produk'],
+                                    );
+                                  },
+                                )
+                              : const Center(
                                   child: CircularProgressIndicator(),
                                 );
                         },

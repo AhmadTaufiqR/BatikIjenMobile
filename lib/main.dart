@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:ijen_batik/view/Screen/DashAfter.dart';
 import 'package:ijen_batik/view/Screen/Order.dart';
 import 'package:ijen_batik/view/Screen/cart.dart';
-import 'package:ijen_batik/view/Screen/detailProduct.dart';
+import 'package:ijen_batik/view/Screen/categories.dart';
 import 'package:ijen_batik/view/Screen/productListCategory.dart';
+import 'package:ijen_batik/view/Screen/profile.dart';
 import 'package:ijen_batik/view/Screen/rekomendasi.dart';
 import 'package:ijen_batik/view/Screen/dash.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => PageCart(),
+        '/': (context) => const login(),
         '/login': (context) => const login(),
         '/dashBefore': (context) => const Dashboard(),
         '/dashAfter': (context) => const DashboardAfter(),
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
         '/myScreen': (context) => const MyScreen(),
         '/rekomendasi': (context) => const rekomendasi(),
         '/listcategory': (context) => const ProductListCategory(),
+        '/cart': (context) => const PageCart(),
+        '/categories': (context) => const CategoriesPage(),
       },
     );
   }
@@ -62,7 +65,7 @@ class _MyScreenState extends State<MyScreen> {
       const DashboardAfter(),
       const orderProduct(),
       const notificationScreen(),
-      const SearchPage(),
+      const ProfilePage(),
     ];
 
     return Scaffold(

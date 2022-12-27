@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
@@ -188,7 +190,7 @@ class _newPassState extends State<newPass> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(
@@ -202,8 +204,8 @@ class _newPassState extends State<newPass> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const login()),
+                              builder: (BuildContext context) => const login(),
+                            ),
                           );
                         }
                       : null,

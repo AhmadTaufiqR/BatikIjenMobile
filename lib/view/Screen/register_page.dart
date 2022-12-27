@@ -14,6 +14,8 @@ class _register_pageState extends State<register_page> {
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
 
+  //TODO: Jika bisa tambahkan validasi jika email sudah atau pernah didaftarkan.
+
   @override
   void initState() {
     super.initState();
@@ -143,7 +145,7 @@ class _register_pageState extends State<register_page> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.23,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(

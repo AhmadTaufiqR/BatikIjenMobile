@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class SQLHelper {
@@ -40,7 +41,16 @@ class SQLHelper {
   static Future<List<Map<String, dynamic>>> getItems() async {
     final db = await SQLHelper.db();
     final items = db.query('carts', orderBy: "id");
-    print(items);
+    // print(items);
     return items;
+  }
+
+  static Future<void> deleteItem(int id) async {
+    final db = await SQLHelper.db();
+    try {
+      await db.delete("carts", where: "id = ?", whereArgs: [id]);
+    } catch (err) {
+      debugPrint("Something went wrong when deleting an item: $err");
+    }
   }
 }

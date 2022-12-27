@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class notificationScreen extends StatefulWidget {
-  const notificationScreen({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<notificationScreen> createState() => _notificationScreenState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _notificationScreenState extends State<notificationScreen> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

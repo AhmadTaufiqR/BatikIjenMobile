@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/service/service.dart';
@@ -145,7 +143,7 @@ class _loginState extends State<login> {
               const SizedBox(
                 height: 80,
               ),
-              Container(
+              SizedBox(
                 width: 340,
                 height: 50,
                 child: ElevatedButton(
