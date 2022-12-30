@@ -33,10 +33,6 @@ class _DashboardAfterState extends State<DashboardAfter> {
             ),
             actions: <Widget>[
               InkWell(
-                child: Image.asset('assets/logo/2.png'),
-                onTap: () {},
-              ),
-              InkWell(
                 child: Image.asset('assets/logo/keranjang.png'),
                 onTap: () {},
               )
@@ -50,11 +46,6 @@ class _DashboardAfterState extends State<DashboardAfter> {
             children: [
               const SizedBox(
                 height: 20,
-              ),
-              Container(
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.only(),
-                child: const autocom(),
               ),
               const SizedBox(
                 height: 50,

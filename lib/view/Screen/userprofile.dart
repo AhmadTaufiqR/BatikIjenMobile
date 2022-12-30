@@ -203,7 +203,7 @@ class _UserProfileState extends State<UserProfile> {
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {
                     snip.SignUp(args.text1!, passwordC.text, args.text2!,
-                        fullnameC.text, teleponC.text);
+                        fullnameC.text, teleponC.text, context);
                   },
                   child: Text(
                     "Continue",

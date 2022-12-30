@@ -24,10 +24,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
           floating: true,
           expandedHeight: 60,
           snap: true,
-          leading: InkWell(
-            child: Image.asset('assets/img/vector.png'),
-            onTap: () => Get.back(),
-          ),
           actions: <Widget>[
             InkWell(
               child: Image.asset('assets/logo/keranjang.png'),
@@ -36,25 +32,27 @@ class _CategoriesPageState extends State<CategoriesPage> {
           ],
         )
       ],
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 7),
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 115,
-                childAspectRatio: 0.95,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15),
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              return CategoryCard(
-                image: categories[index].icon,
-                title: categories[index].title,
-                press: () {},
-              );
-            },
-          )),
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 7),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 115,
+                  childAspectRatio: 0.95,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15),
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return CategoryCard(
+                  image: categories[index].icon,
+                  title: categories[index].title,
+                  press: () {},
+                );
+              },
+            )),
+      ),
     ));
   }
 }

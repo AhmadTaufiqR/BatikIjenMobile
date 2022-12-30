@@ -47,9 +47,10 @@ class _PageCartState extends State<PageCart> {
             floating: true,
             expandedHeight: 60,
             snap: true,
-            leading: InkWell(
-              onTap: () => Get.back(),
-              child: Image.asset('assets/img/vector.png'),
+            titleSpacing: 120,
+            title: Text(
+              "Cart",
+              style: GoogleFonts.dmSans(color: Colors.black),
             ),
           )
         ],

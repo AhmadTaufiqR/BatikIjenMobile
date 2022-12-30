@@ -2,15 +2,13 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ijen_batik/view/Screen/DashAfter.dart';
-import 'package:ijen_batik/view/Screen/Order.dart';
 import 'package:ijen_batik/view/Screen/cart.dart';
 import 'package:ijen_batik/view/Screen/categories.dart';
 import 'package:ijen_batik/view/Screen/productListCategory.dart';
+import 'package:ijen_batik/view/Screen/product_list_search.dart';
 import 'package:ijen_batik/view/Screen/profile.dart';
 import 'package:ijen_batik/view/Screen/rekomendasi.dart';
-import 'package:ijen_batik/view/Screen/dash.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
-import 'package:ijen_batik/view/Screen/notification.dart';
 import 'package:ijen_batik/view/Screen/search.dart';
 import 'package:ijen_batik/view/Screen/userprofile.dart';
 
@@ -32,14 +30,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const login(),
+        '/': (context) => const MyScreen(),
         '/login': (context) => const login(),
-        '/dashBefore': (context) => const Dashboard(),
         '/dashAfter': (context) => const DashboardAfter(),
         '/profile': (context) => const UserProfile(),
         '/search': (context) => const SearchPage(),
-        '/order': (context) => const orderProduct(),
-        '/notification': (context) => const notificationScreen(),
         '/myScreen': (context) => const MyScreen(),
         '/rekomendasi': (context) => const rekomendasi(),
         '/listcategory': (context) => const ProductListCategory(),
@@ -63,8 +58,9 @@ class _MyScreenState extends State<MyScreen> {
   Widget build(BuildContext context) {
     List screen = [
       const DashboardAfter(),
-      const orderProduct(),
-      const notificationScreen(),
+      const SearchPage(),
+      const CategoriesPage(),
+      const PageCart(),
       const ProfilePage(),
     ];
 
@@ -77,12 +73,16 @@ class _MyScreenState extends State<MyScreen> {
             label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_rounded),
-            label: 'Orders',
+            icon: Icon(Icons.search_rounded),
+            label: 'Search',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notification',
+            icon: Icon(Icons.category),
+            label: 'Category',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_sharp),
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.account_circle),
