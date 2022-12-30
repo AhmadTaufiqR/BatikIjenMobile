@@ -20,17 +20,18 @@ class GetxSnippet extends GetxController {
         await http.post(Uri.parse("http://10.0.2.2/api/login.php"), body: data);
     var uji = jsonEncode(jsonDecode(respons.body));
     final Map<String, dynamic> datalog = json.decode(respons.body);
-    var nametag = datalog['user_list'][0]['nama_lengkap'];
+
     // print(respons.body);
     if (uji.contains('Sukses')) {
       AwesomeDialog(
         context: context,
-        animType: AnimType.leftSlide,
+        animType: AnimType.scale,
         headerAnimationLoop: true,
         dialogType: DialogType.success,
         title: 'Succes',
         desc: 'Anda Berhasil Login',
         btnOkOnPress: () {
+          var nametag = datalog['user_list'][0]['nama_lengkap'];
           Get.toNamed('/myScreen', arguments: nametag);
         },
         onDismissCallback: (type) {
@@ -38,20 +39,36 @@ class GetxSnippet extends GetxController {
         },
       ).show();
     } else if (uji.contains('Username_salah')) {
-      Get.snackbar("Error", "Username Yang Anda Masukkan Salah",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.red);
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.scale,
+        headerAnimationLoop: true,
+        dialogType: DialogType.warning,
+        title: 'Warning',
+        desc: 'Username Yang Anda Masukkan Salah',
+        btnOkOnPress: () {},
+        onDismissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },
+      ).show();
     } else if (uji.contains('Password_salah')) {
-      Get.snackbar("Error", "Password Yang Anda Masukkan Salah",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.red);
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.scale,
+        headerAnimationLoop: true,
+        dialogType: DialogType.warning,
+        title: 'Warning',
+        desc: 'Password Yang Anda Masukkan Salah',
+        btnOkOnPress: () {},
+        onDismissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },
+      ).show();
     }
   }
 
   // ignore: non_constant_identifier_names
-  SignUp(String user, pass, email, full, telepon) async {
+  SignUp(String user, pass, email, full, telepon, dynamic context) async {
     Map data = {
       'username': user,
       'password': pass,
@@ -65,22 +82,46 @@ class GetxSnippet extends GetxController {
     var uji = jsonEncode(jsonDecode(respons.body));
 
     if (uji.contains('USER_REGISTERED')) {
-      Get.snackbar("Success", "Register Berhasil",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.green);
-      Get.toNamed('/login');
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.scale,
+        headerAnimationLoop: true,
+        dialogType: DialogType.success,
+        title: 'Succes',
+        desc: 'Anda Berhasil Login',
+        btnOkOnPress: () {
+          Get.toNamed('/login');
+        },
+        onDismissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },
+      ).show();
     } else if (uji.contains('EMAIL_ALREADY')) {
-      Get.snackbar("Error",
-          "Email Telah Terdaftar, Silahkan Masukkan Kembali Email Anda",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.red);
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.scale,
+        headerAnimationLoop: true,
+        dialogType: DialogType.warning,
+        title: 'Warning',
+        desc: 'Email Sudah Terdaftar, Silahkan Masukkan Email Anda Kembali',
+        btnOkOnPress: () {},
+        onDismissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },
+      ).show();
     } else if (uji.contains('REGISTER_ERROR')) {
-      Get.snackbar("Error", "Silahkan Isi Kembali Data Anda",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.red);
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.scale,
+        headerAnimationLoop: true,
+        dialogType: DialogType.warning,
+        title: 'Warning',
+        desc: 'Silahkan Masukkan Kembali, Data Anda',
+        btnOkOnPress: () {},
+        onDismissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },
+      ).show();
     }
   }
 }

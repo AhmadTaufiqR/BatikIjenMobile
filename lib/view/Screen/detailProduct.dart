@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,10 +47,6 @@ class _ProductViewState extends State<ProductView> {
               onTap: () => Navigator.pop(context),
             ),
             actions: <Widget>[
-              InkWell(
-                child: Image.asset('assets/logo/2.png'),
-                onTap: () {},
-              ),
               InkWell(
                 child: Image.asset('assets/logo/keranjang.png'),
                 onTap: () {
@@ -126,15 +124,13 @@ class _ProductViewState extends State<ProductView> {
         height: 70,
         padding: const EdgeInsets.all(8.0),
         child: OutlinedButton(
-          onPressed: () {
-            additems();
-          },
+          onPressed: () {},
           style: OutlinedButton.styleFrom(
               side: const BorderSide(),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10))),
           child: Text(
-            "Masukkan Keranjang",
+            "Add To Cart",
             style: GoogleFonts.dmSans(
                 fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
           ),

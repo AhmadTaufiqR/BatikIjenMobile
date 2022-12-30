@@ -36,9 +36,11 @@ dependencies:
   flutter_svg: ^1.1.5
   get: null
   google_fonts: ^3.0.1
-  sqflite: ^2.2.2
+  image_cropper: ^3.0.1
+  image_picker: ^0.8.6
   path: ^1.8.2
   shared_preferences: ^2.0.15
+  sqflite: ^2.2.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/view/widget/autocom.dart';
 
@@ -33,19 +34,8 @@ class _SearchPageState extends State<SearchPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 17),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Image.asset('assets/img/vector.png'),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 150,
-                        ),
                         Text(
                           "Search",
                           style: GoogleFonts.dmSans(
