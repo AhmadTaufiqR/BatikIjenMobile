@@ -23,10 +23,10 @@ class _ProductViewState extends State<ProductView> {
 
   Future<void> additems() async {
     await SQLHelper.createItem(datas!['nama_produk'], datas!['gambar_produk'],
-        datas!['harga_produk'], datas!['id_produk']);
+        datas!['harga_produk'], '1');
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Successfully deleted a journal!'),
+      content: Text('Berhasil Menambah Barang!'),
     ));
     // print(datas);
   }
@@ -124,7 +124,9 @@ class _ProductViewState extends State<ProductView> {
         height: 70,
         padding: const EdgeInsets.all(8.0),
         child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            additems();
+          },
           style: OutlinedButton.styleFrom(
               side: const BorderSide(),
               shape: RoundedRectangleBorder(

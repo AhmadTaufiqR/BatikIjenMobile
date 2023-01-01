@@ -53,4 +53,16 @@ class SQLHelper {
       debugPrint("Something went wrong when deleting an item: $err");
     }
   }
+
+  static Future<int> updateItem(int id, int jumlah) async {
+    final db = await SQLHelper.db();
+
+    final data = {
+      'jumlah': jumlah,
+    };
+
+    final result =
+        await db.update('carts', data, where: "id = ?", whereArgs: [id]);
+    return result;
+  }
 }

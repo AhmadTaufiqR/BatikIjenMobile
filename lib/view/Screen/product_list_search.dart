@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ijen_batik/models/argumentsSearch.dart';
 import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/widget/card.dart';
 
@@ -14,6 +15,7 @@ class _ProductListSearchState extends State<ProductListSearch> {
   GetxSnippet snip = GetxSnippet();
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as argumentsSearch;
     return Scaffold(
         body: NestedScrollView(
             floatHeaderSlivers: true,
@@ -39,41 +41,28 @@ class _ProductListSearchState extends State<ProductListSearch> {
                 ],
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 7),
-                child: FutureBuilder(
-                  future: snip.allproduct(),
-                  initialData: const [],
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) print(snapshot.error);
-                    List data = snapshot.data;
-                    return snapshot.hasData
-                        ? GridView.builder(
-                            shrinkWrap: true,
-                            physics: const ScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 290,
-                                    childAspectRatio: 0.65,
-                                    crossAxisSpacing: 3,
-                                    mainAxisSpacing: 3),
-                            itemCount: data.length,
-                            itemBuilder: (context, index) {
-                              return Cardvalue(
-                                title: data[index]['nama_produk'],
-                                img:
-                                    "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
-                                harga: data[index]['harga_produk'],
-                                data: data[index],
-                                desc: data[index]['rincian_produk'],
-                              );
-                            },
-                          )
-                        : const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                  },
-                ),
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 290,
+                            childAspectRatio: 0.65,
+                            crossAxisSpacing: 3,
+                            mainAxisSpacing: 3),
+                    itemCount: args.data!.length,
+                    itemBuilder: (context, index) {
+                      return Cardvalue(
+                        title: args.data![index]['nama_produk'],
+                        img:
+                            "http://10.0.2.2/api/baru/uploads/${args.data![index]['gambar_produk']}",
+                        harga: args.data![index]['harga_produk'],
+                        data: args.data![index],
+                        desc: args.data![index]['rincian_produk'],
+                      );
+                    },
+                  )),
             )));
   }
 }

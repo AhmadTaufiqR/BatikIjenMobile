@@ -4,8 +4,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/service/service.dart';
+import 'package:ijen_batik/view/Screen/login_page.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -15,6 +18,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  GetxSnippet snip = GetxSnippet();
+  TextEditingController? name = TextEditingController();
+  TextEditingController? addres = TextEditingController();
+  TextEditingController? no = TextEditingController();
+  TextEditingController? email = TextEditingController();
+  TextEditingController? pekerjaan = TextEditingController();
+  // TextEditingController? gambar = TextEditingController();
+  TextEditingController? umur = TextEditingController();
+  String? id;
+
   File? profileImage;
 
   Future getImage() async {
@@ -31,6 +44,40 @@ class _ProfilePageState extends State<ProfilePage> {
         await ImageCropper().cropImage(sourcePath: imageFile.path);
     if (cropped == null) return null;
     return File(cropped.path);
+  }
+
+  @override
+  void initState() {
+    _getData();
+    // print(nama);
+    super.initState();
+  }
+
+  void _getData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(
+      () {
+        // Mengambil data dengan kunci "data_3"
+        id = sharedPreferences.getString('id').toString();
+        name!.text = sharedPreferences.getString('namalengkap').toString();
+        // addres!.text = sharedPreferences.getString('alamat').toString();
+        no!.text = sharedPreferences.getString('telepon').toString();
+        email!.text = sharedPreferences.getString('email').toString();
+        // pekerjaan!.text = sharedPreferences.getString('pekerjaan').toString();
+        // gambar!.text = sharedPreferences.getString('gambar').toString();
+        // umur!.text = sharedPreferences.getString('umur').toString();
+        print(id);
+        print(name!.text);
+        print(addres!.text);
+        print(no!.text);
+        print(email!.text);
+        print(pekerjaan!.text);
+        print(profileImage.toString());
+        print(umur!.text);
+
+        // print(sharedPreferences.getString('username'));
+      },
+    );
   }
 
   @override
@@ -62,25 +109,25 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Stack(
                     children: [
                       CircleAvatar(
-                        radius: 80,
+                        radius: 65,
                         backgroundImage: profileImage == null
-                            ? const NetworkImage(
-                                "https://i.ibb.co/PGv8ZzG/me.jpg",
-                              )
+                            ? const AssetImage("assets/logo/imageprofile.png")
                             : FileImage(profileImage!) as ImageProvider,
                       ),
                       Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: IconButton(
-                              onPressed: () {
-                                getImage();
-                              },
-                              icon: const Icon(
-                                Icons.camera_alt_outlined,
-                                size: 30,
-                                color: Colors.amber,
-                              )))
+                        bottom: 0,
+                        right: 0,
+                        child: IconButton(
+                          onPressed: () {
+                            getImage();
+                          },
+                          icon: const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 30,
+                            color: Colors.amber,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -92,8 +139,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.only(),
                 child: TextFormField(
-                  initialValue: 'John Doe',
-                  maxLength: 20,
+                  controller: name,
+                  maxLength: 50,
                   decoration: const InputDecoration(
                     labelText: 'Name',
                     labelStyle: TextStyle(
@@ -112,81 +159,96 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 10,
               ),
-              Padding(
+              Container(
                 padding: const EdgeInsets.all(12),
-                child: LayoutBuilder(builder: (context, constraint) {
-                  List<String> itemStringList = ["Female", "Male"];
-                  return FormField(
-                    initialValue: false,
-                    enabled: true,
-                    builder: (FormFieldState<bool> field) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: "Gender",
-                          errorText: field.errorText,
-                          helperText: "Your gender",
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: ButtonTheme(
-                            alignedDropdown: true,
-                            child: DropdownButton<String>(
-                              isExpanded: true,
-                              value: "Female",
-                              icon: Padding(
-                                padding: const EdgeInsets.only(right: 10.0),
-                                child: Icon(
-                                  Icons.arrow_drop_down_outlined,
-                                  size: 24.0,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .color,
-                                ),
-                              ),
-                              iconSize: 16,
-                              elevation: 16,
-                              style: TextStyle(
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .fontSize,
-                                fontFamily: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .fontFamily,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .color,
-                              ),
-                              underline: Container(
-                                height: 0,
-                                color: Colors.blueGrey,
-                              ),
-                              onChanged: (String? newValue) {
-                                print(newValue);
-                              },
-                              items: itemStringList
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Text(
-                                      value,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }),
+                margin: const EdgeInsets.only(),
+                child: TextFormField(
+                  controller: no,
+                  maxLength: 13,
+                  decoration: const InputDecoration(
+                    labelText: 'No Telepon',
+                    labelStyle: TextStyle(
+                      color: Colors.blueGrey,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    helperText: "Your number phone?",
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(),
+                child: TextFormField(
+                  controller: email,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      color: Colors.blueGrey,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    helperText: "What's your email?",
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(),
+                child: TextFormField(
+                  controller: pekerjaan,
+                  decoration: const InputDecoration(
+                    labelText: 'Pekerjaan',
+                    labelStyle: TextStyle(
+                      color: Colors.blueGrey,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    helperText: "What's your job?",
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(),
+                child: TextFormField(
+                  controller: umur,
+                  maxLength: 3,
+                  decoration: const InputDecoration(
+                    labelText: 'Usia',
+                    labelStyle: TextStyle(
+                      color: Colors.blueGrey,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    helperText: "What's your age",
+                  ),
+                  onChanged: (value) {},
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -205,12 +267,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 10,
                     ),
                     TextFormField(
+                      controller: addres,
                       maxLines: 4,
-                      initialValue: null,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        labelText: "Amount",
+                        labelText: "Alamat",
                         hintText: "Search",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -221,6 +283,63 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.blue,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      snip.updatepro(id.toString(), profileImage.toString(),
+                          pekerjaan!.text, umur!.text, addres!.text, context);
+                      // print(profileImage.toString());
+                    });
+                  },
+                  child: const Text("Update Profile"),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.redAccent,
+                      backgroundColor: Colors.red[100]),
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.remove("username");
+                    prefs.remove("password");
+                    prefs.remove("gambar");
+                    prefs.remove("namalengkap");
+                    prefs.remove("email");
+                    prefs.remove("telepon");
+                    prefs.remove("alamat");
+                    prefs.remove("umur");
+                    prefs.remove("pekerjaan");
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const login(),
+                        ));
+                  },
+                  child: const Text("Logout"),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              )
             ],
           ),
         ),
