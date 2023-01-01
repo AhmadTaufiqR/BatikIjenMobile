@@ -83,7 +83,11 @@ class _DashboardAfterState extends State<DashboardAfter> {
                   itemBuilder: (context, index) => CategoryCard(
                     image: categories[index].icon,
                     title: categories[index].title,
-                    press: () {},
+                    press: () {
+                      snip.categori(categories[index].title);
+                      // Get.toNamed('/listcategory',
+                      //     arguments: categories[index].title);
+                    },
                   ),
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 5),

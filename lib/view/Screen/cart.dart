@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/service/sqlhalper.dart';
 
 class PageCart extends StatefulWidget {
@@ -11,9 +11,8 @@ class PageCart extends StatefulWidget {
 }
 
 class _PageCartState extends State<PageCart> {
+  GetxSnippet snip = GetxSnippet();
   List<Map<String, dynamic>> listData = [];
-  var inc = 1;
-  int hargaTotal = 0;
   void refresh() async {
     var data = await SQLHelper.getItems();
     setState(() {
@@ -22,17 +21,33 @@ class _PageCartState extends State<PageCart> {
     });
   }
 
+  double get totalAmount => listData.fold(
+      0.0, (sum, element) => sum + element['harga'] * element['jumlah']);
+
   void deleteItem(int id) async {
     await SQLHelper.deleteItem(id);
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Successfully deleted a journal!'),
+      content: Text('Berhasil Menghapus Barang!'),
     ));
+  }
+
+  void _updataItem(int id, inc) async {
+    var hitung = inc++;
+    await SQLHelper.updateItem(id, hitung);
+    refresh();
+  }
+
+  void updatedeleteItem(int id, dnc) async {
+    var hitung = dnc--;
+    await SQLHelper.updateItem(id, hitung);
+    refresh();
   }
 
   @override
   void initState() {
     refresh();
+
     super.initState();
   }
 
@@ -47,12 +62,12 @@ class _PageCartState extends State<PageCart> {
             floating: true,
             expandedHeight: 60,
             snap: true,
-            titleSpacing: 120,
+            titleSpacing: 175,
             title: Text(
               "Cart",
               style: GoogleFonts.dmSans(color: Colors.black),
             ),
-          )
+          ),
         ],
         body: SingleChildScrollView(
           child: Container(
@@ -61,51 +76,85 @@ class _PageCartState extends State<PageCart> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: listData.length,
-              itemBuilder: (context, index) => Card(
-                color: Colors.blueGrey[100],
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                    title: Text(listData[index]['nama']),
-                    subtitle: Text(listData[index]['harga'].toString()),
-                    leading: Image.network(
-                      "http://10.0.2.2/api/baru/uploads/${listData[index]['gambar']}",
-                      fit: BoxFit.fill,
-                    ),
-                    trailing: SizedBox(
-                      width: 105,
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.do_disturb_on,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                //TODO: Masih belum bisa menambahkan berdasarkan id
-                                if (inc == 0) {
-                                  deleteItem(listData[index]['id']);
-                                  refresh();
-                                }
-                              });
-                            },
-                          ),
-                          Text(inc.toString()),
-                          IconButton(
-                              icon: const Icon(Icons.add_circle, size: 20),
+              itemBuilder: (context, index) => Column(
+                children: [
+                  Card(
+                    color: Colors.blueGrey[100],
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: ListTile(
+                      title: Text(listData[index]['nama']),
+                      subtitle: Text(listData[index]['harga'].toString()),
+                      leading: Image.network(
+                        "http://10.0.2.2/api/baru/uploads/${listData[index]['gambar']}",
+                        fit: BoxFit.fill,
+                      ),
+                      trailing: SizedBox(
+                        width: 105,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.do_disturb_on,
+                                size: 20,
+                              ),
                               onPressed: () {
-                                //TODO: Masih belum bisa menambahkan berdasarkan id
                                 setState(() {
-                                  if (inc != 0) {
-                                    //TODO: harga masih juga belum bisa
-                                    hargaTotal = listData[index]['harga'] +
-                                        listData[index]['harga'];
+                                  int id = listData[index]['id'];
+                                  int dec = listData[index]['jumlah'];
+                                  dec = dec - 1;
+                                  updatedeleteItem(id, dec);
+                                  refresh();
+                                  if (dec == 0) {
+                                    deleteItem(listData[index]['id']);
+                                    refresh();
                                   }
                                 });
-                              }),
-                        ],
+                              },
+                            ),
+                            Text(listData[index]['jumlah'].toString()),
+                            IconButton(
+                                icon: const Icon(Icons.add_circle, size: 20),
+                                onPressed: () {
+                                  setState(() {
+                                    int id = listData[index]['id'];
+                                    int inc = listData[index]['jumlah'];
+                                    inc++;
+                                    _updataItem(id, inc);
+                                  });
+                                }),
+                          ],
+                        ),
                       ),
-                    )),
+                    ),
+                  ),
+                  Container(
+                    height: 70,
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(8.0),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        setState(() {
+                          snip.addshop(
+                              totalAmount.toString(),
+                              listData[index]['jumlah'].toString(),
+                              listData[index]['harga'].toString(),
+                              context);
+                        });
+                      },
+                      style: OutlinedButton.styleFrom(
+                          side: const BorderSide(),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: Text(
+                        "Pesan",
+                        style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -124,30 +173,11 @@ class _PageCartState extends State<PageCart> {
               child: Row(
                 children: [
                   Text(
-                    "Total Harga : $hargaTotal",
+                    "Total Harga :${totalAmount} ",
                     style: GoogleFonts.dmSans(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
-              ),
-            ),
-            Container(
-              height: 70,
-              width: double.infinity,
-              padding: const EdgeInsets.all(8.0),
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                    side: const BorderSide(),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                child: Text(
-                  "Pesan",
-                  style: GoogleFonts.dmSans(
-                      fontSize: 14,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
               ),
             ),
           ],

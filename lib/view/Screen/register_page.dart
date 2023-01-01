@@ -1,8 +1,12 @@
+import 'dart:convert';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/models/getArgumen.dart';
+import 'package:http/http.dart' as http;
 
 class register_page extends StatefulWidget {
   @override
@@ -10,7 +14,11 @@ class register_page extends StatefulWidget {
 }
 
 class _register_pageState extends State<register_page> {
+  // ignore: non_constant_identifier_names
+  var form_key = GlobalKey<FormState>();
+  String? emailvalidate;
   bool isActivate = false;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
 
@@ -35,6 +43,17 @@ class _register_pageState extends State<register_page> {
   void dispose() {
     emailController.dispose();
     super.dispose();
+  }
+
+  checkEmail(String? email) async {
+    Map data = {
+      'email': email,
+    };
+    var url = Uri.parse("http://10.0.2.2/api/CheckingUser.php");
+    var response = await http.post(url, body: data);
+    final List<dynamic> datalog = json.decode(response.body);
+    emailvalidate = datalog[0]["email"];
+    // print(datalog[0]['email']);
   }
 
   @override
@@ -82,24 +101,34 @@ class _register_pageState extends State<register_page> {
                 padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
-                  child: TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Color.fromRGBO(246, 246, 246, 100),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+                  child: Form(
+                    key: form_key,
+                    child: TextFormField(
+                      validator: (value) => GetUtils.isEmail(value!)
+                          ? null
+                          : 'Silahkan Masukkan Kembali Email Anda',
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(246, 246, 246, 100),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          borderSide: BorderSide.none,
                         ),
-                        borderSide: BorderSide.none,
+                        hintText: "Masukkan Alamat Email Anda",
+                        hintStyle: TextStyle(
+                          color: Color.fromRGBO(196, 197, 196, 100),
+                        ),
                       ),
-                      hintText: "Masukkan Alamat Email Anda",
-                      hintStyle: TextStyle(
-                        color: Color.fromRGBO(196, 197, 196, 100),
+                      style: const TextStyle(
+                        fontSize: 14,
                       ),
-                    ),
-                    style: const TextStyle(
-                      fontSize: 14,
+                      onChanged: (value) {
+                        print(value);
+                        checkEmail(value);
+                      },
                     ),
                   ),
                 ),
@@ -157,10 +186,32 @@ class _register_pageState extends State<register_page> {
                   ),
                   onPressed: isActivate
                       ? () {
-                          setState(() => isActivate = false);
-                          Get.toNamed("/profile",
-                              arguments: getargu(usernameController.text,
-                                  emailController.text));
+                          setState(() {
+                            isActivate = false;
+                          });
+                          if (form_key.currentState!.validate()) {
+                            if (emailvalidate != null) {
+                              AwesomeDialog(
+                                context: context,
+                                animType: AnimType.scale,
+                                headerAnimationLoop: true,
+                                dialogType: DialogType.error,
+                                title: 'Salah',
+                                desc: 'Email Yang Anda Masukkan Sudah Tersedia',
+                                btnOkOnPress: () {
+                                  emailvalidate = null;
+                                },
+                                onDismissCallback: (type) {
+                                  debugPrint(
+                                      'Dialog Dissmiss from callback $type');
+                                },
+                              ).show();
+                            } else {
+                              Get.toNamed("/profile",
+                                  arguments: getargu(usernameController.text,
+                                      emailController.text));
+                            }
+                          }
                         }
                       : null,
                   child: Text(
@@ -205,5 +256,13 @@ class _register_pageState extends State<register_page> {
         ),
       ),
     );
+  }
+}
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(this);
   }
 }

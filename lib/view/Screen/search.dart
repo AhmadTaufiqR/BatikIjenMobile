@@ -14,47 +14,31 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(boxShadow: [
-                BoxShadow(
-                    blurRadius: 5,
-                    blurStyle: BlurStyle.normal,
-                    color: Colors.black12,
-                    spreadRadius: 70)
-              ]),
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            floating: true,
+            expandedHeight: 60,
+            snap: true,
+            titleSpacing: 120,
+            title: Text(
+              "Search",
+              style: GoogleFonts.dmSans(color: Colors.black),
             ),
-            Stack(
-              children: [
-                Container(
-                  height: 70,
-                  decoration: const BoxDecoration(color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 17),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Search",
-                          style: GoogleFonts.dmSans(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const autocom(),
-            const SizedBox()
-          ],
+          )
+        ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SizedBox(
+                height: 15,
+              ),
+              autocom(),
+              SizedBox()
+            ],
+          ),
         ),
       ),
     );

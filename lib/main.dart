@@ -11,10 +11,34 @@ import 'package:ijen_batik/view/Screen/rekomendasi.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
 import 'package:ijen_batik/view/Screen/search.dart';
 import 'package:ijen_batik/view/Screen/userprofile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var username = prefs.getString('username');
+  var password = prefs.getString('password');
+  print(username);
+  print(password);
   runApp(
-    const MyApp(),
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: username == null && password == null ? '/login' : '/',
+      title: 'Sanggar Batik',
+      routes: {
+        '/': (context) => const MyScreen(),
+        '/login': (context) => const login(),
+        '/dashAfter': (context) => const DashboardAfter(),
+        '/profile': (context) => const UserProfile(),
+        '/search': (context) => const SearchPage(),
+        '/myScreen': (context) => const MyScreen(),
+        '/rekomendasi': (context) => const rekomendasi(),
+        '/listcategory': (context) => const ProductListCategory(),
+        '/listsearch': (context) => const ProductListSearch(),
+        '/cart': (context) => const PageCart(),
+        '/categories': (context) => const CategoriesPage(),
+      },
+    ),
   );
 }
 
@@ -30,14 +54,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyScreen(),
+        '/': (context) => const DashboardAfter(),
         '/login': (context) => const login(),
         '/dashAfter': (context) => const DashboardAfter(),
         '/profile': (context) => const UserProfile(),
         '/search': (context) => const SearchPage(),
         '/myScreen': (context) => const MyScreen(),
         '/rekomendasi': (context) => const rekomendasi(),
-        '/listcategory': (context) => const ProductListCategory(),
+        '/listcategory': (context) => ProductListCategory(),
         '/cart': (context) => const PageCart(),
         '/categories': (context) => const CategoriesPage(),
       },
@@ -67,26 +91,26 @@ class _MyScreenState extends State<MyScreen> {
     return Scaffold(
       body: screen[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
             label: 'Home',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.search_rounded),
             label: 'Search',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: 'Category',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_sharp),
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.account_circle),
-            label: Get.arguments == null ? "Login" : "Saya",
+            icon: Icon(Icons.account_circle),
+            label: "Saya",
           ),
         ],
         currentIndex: _selectedIndex,
@@ -96,26 +120,7 @@ class _MyScreenState extends State<MyScreen> {
         onTap: (index) {
           setState(
             () {
-              if (index == 3 && Get.arguments == null) {
-                AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.warning,
-                  headerAnimationLoop: false,
-                  animType: AnimType.topSlide,
-                  closeIcon: const Icon(Icons.close_fullscreen_outlined),
-                  title: 'Warning',
-                  desc: 'Silahkan Login Terlebih Dahulu',
-                  btnCancelOnPress: () {},
-                  onDismissCallback: (type) {
-                    debugPrint('Dialog Dissmiss from callback $type');
-                  },
-                  btnOkOnPress: () {
-                    Get.to(const login());
-                  },
-                ).show();
-              } else {
-                _selectedIndex = index;
-              }
+              _selectedIndex = index;
             },
           );
         },

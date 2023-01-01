@@ -1,8 +1,10 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/main.dart';
+import 'package:ijen_batik/models/argumencatgory.dart';
 import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/widget/autocom.dart';
 import 'package:ijen_batik/view/widget/card.dart';
@@ -15,9 +17,9 @@ class ProductListCategory extends StatefulWidget {
 }
 
 class _ProductListCategoryState extends State<ProductListCategory> {
-  GetxSnippet snip = GetxSnippet();
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as argumentcategory;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -84,7 +86,7 @@ class _ProductListCategoryState extends State<ProductListCategory> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 11),
-              child: Text("Gadget",
+              child: Text(args.produk!,
                   style: GoogleFonts.dmSans(
                       fontSize: 24, fontWeight: FontWeight.bold)),
             ),
@@ -93,41 +95,27 @@ class _ProductListCategoryState extends State<ProductListCategory> {
             ),
             const autocom(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 7),
-              child: FutureBuilder(
-                future: snip.allproduct(),
-                initialData: const [],
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-                  List data = snapshot.data;
-                  return snapshot.hasData
-                      ? GridView.builder(
-                          shrinkWrap: true,
-                          physics: const ScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 290,
-                                  childAspectRatio: 0.65,
-                                  crossAxisSpacing: 3,
-                                  mainAxisSpacing: 3),
-                          itemCount: data.length,
-                          itemBuilder: (context, index) {
-                            return Cardvalue(
-                              title: data[index]['nama_produk'],
-                              img:
-                                  "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
-                              harga: data[index]['harga_produk'],
-                              data: data[index],
-                              desc: data[index]['rincian_produk'],
-                            );
-                          },
-                        )
-                      : const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                },
-              ),
-            )
+                padding: const EdgeInsets.symmetric(horizontal: 7),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 290,
+                      childAspectRatio: 0.65,
+                      crossAxisSpacing: 3,
+                      mainAxisSpacing: 3),
+                  itemCount: args.data!.length,
+                  itemBuilder: (context, index) {
+                    return Cardvalue(
+                      title: args.data![index]['nama_produk'],
+                      img:
+                          "http://10.0.2.2/api/baru/uploads/${args.data![index]['gambar_produk']}",
+                      harga: args.data![index]['harga_produk'],
+                      data: args.data![index],
+                      desc: args.data![index]['rincian_produk'],
+                    );
+                  },
+                ))
           ],
         ),
       ),

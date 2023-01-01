@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ijen_batik/models/categories.dart';
+import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/widget/categories.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -13,6 +15,7 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+  GetxSnippet snip = GetxSnippet();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +27,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
           floating: true,
           expandedHeight: 60,
           snap: true,
-          actions: <Widget>[
-            InkWell(
-              child: Image.asset('assets/logo/keranjang.png'),
-              onTap: () {},
-            )
-          ],
+          titleSpacing: 110,
+          title: Text(
+            "Category",
+            style: GoogleFonts.dmSans(color: Colors.black),
+          ),
         )
       ],
       body: SingleChildScrollView(
@@ -48,7 +50,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 return CategoryCard(
                   image: categories[index].icon,
                   title: categories[index].title,
-                  press: () {},
+                  press: () {
+                    snip.categori(categories[index].title);
+                    // Get.toNamed('/listcategory',
+                    //     arguments: categories[index].title);
+                  },
                 );
               },
             )),

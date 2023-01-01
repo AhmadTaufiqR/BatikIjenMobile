@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
 
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ijen_batik/service/service.dart';
 import 'package:ijen_batik/view/Screen/login_page.dart';
+import 'package:ijen_batik/view/Screen/reset_password.dart';
 
 class newPass extends StatefulWidget {
   const newPass({super.key});
@@ -12,6 +15,7 @@ class newPass extends StatefulWidget {
 }
 
 class _newPassState extends State<newPass> {
+  GetxSnippet snip = GetxSnippet();
   bool _isObscure = true;
   bool isObscure = true;
   bool isActivate = false;
@@ -153,7 +157,7 @@ class _newPassState extends State<newPass> {
                 padding: const EdgeInsets.only(right: 25),
                 child: SizedBox(
                   height: 45,
-                  child: TextField(
+                  child: TextFormField(
                     controller: newpassController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
@@ -184,6 +188,9 @@ class _newPassState extends State<newPass> {
                     style: const TextStyle(
                       fontSize: 14,
                     ),
+                    onChanged: (value) {
+                      if (value != passwordController!.text) {}
+                    },
                   ),
                 ),
               ),
@@ -201,12 +208,8 @@ class _newPassState extends State<newPass> {
                   onPressed: isActivate
                       ? () {
                           setState(() => isActivate = false);
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => const login(),
-                            ),
-                          );
+                          snip.resetPassword(
+                              passwordController!.text, Get.arguments, context);
                         }
                       : null,
                   child: Text(
