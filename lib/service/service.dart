@@ -12,7 +12,8 @@ import 'package:url_launcher/url_launcher.dart';
 class GetxSnippet extends GetxController {
   String? nama;
   Future allproduct() async {
-    var url = Uri.parse("http://10.0.2.2/api/baru/viewall.php");
+    var url =
+        Uri.parse("https://sanggar-batik.wstif3a-bws.id/api/baru/viewall.php");
     var response = await http.get(url);
     return json.decode(response.body);
   }
@@ -23,8 +24,9 @@ class GetxSnippet extends GetxController {
       'username': username,
       'password': pass,
     };
-    var respons =
-        await http.post(Uri.parse("http://10.0.2.2/api/login.php"), body: data);
+    var respons = await http.post(
+        Uri.parse("https://sanggar-batik.wstif3a-bws.id/api/login.php"),
+        body: data);
     var uji = jsonEncode(jsonDecode(respons.body));
     final Map<String, dynamic> datalog = json.decode(respons.body);
 
@@ -91,7 +93,8 @@ class GetxSnippet extends GetxController {
       'telepon': telepon,
     };
 
-    var respons = await http.post(Uri.parse('http://10.0.2.2/api/register.php'),
+    var respons = await http.post(
+        Uri.parse('https://sanggar-batik.wstif3a-bws.id/api/register.php'),
         body: data);
     var uji = jsonEncode(jsonDecode(respons.body));
 
@@ -145,7 +148,8 @@ class GetxSnippet extends GetxController {
       'email': email,
     };
 
-    var respons = await http.post(Uri.parse('http://10.0.2.2/api/editpass.php'),
+    var respons = await http.post(
+        Uri.parse('https://sanggar-batik.wstif3a-bws.id/api/editpass.php'),
         body: data);
 
     // print(jsonDecode(respons.body));
@@ -186,7 +190,8 @@ class GetxSnippet extends GetxController {
     Map data = {
       'title': jenis,
     };
-    var url = Uri.parse("http://10.0.2.2/api/baru/viewall_category.php");
+    var url = Uri.parse(
+        "https://sanggar-batik.wstif3a-bws.id/api/baru/viewall_category.php");
     var response = await http.post(url, body: data);
     final List<dynamic> datalog = json.decode(response.body);
     Get.toNamed('/listcategory', arguments: argumentcategory(jenis, datalog));
@@ -196,7 +201,8 @@ class GetxSnippet extends GetxController {
     Map data = {
       'cari': search,
     };
-    var url = Uri.parse("http://10.0.2.2/api/CariProduct.php");
+    var url =
+        Uri.parse("https://sanggar-batik.wstif3a-bws.id/api/CariProduct.php");
     var response = await http.post(url, body: data);
     final List<dynamic> datalog = json.decode(response.body);
     print(datalog);
@@ -213,8 +219,9 @@ class GetxSnippet extends GetxController {
       'path_gambar': gambar,
     };
 
-    var respons = await http
-        .post(Uri.parse('http://10.0.2.2/api/updateprof.php'), body: data);
+    var respons = await http.post(
+        Uri.parse('https://sanggar-batik.wstif3a-bws.id/api/updateprof.php'),
+        body: data);
 
     // print(jsonDecode(respons.body));
     var uji = jsonEncode(jsonDecode(respons.body));
@@ -255,8 +262,9 @@ class GetxSnippet extends GetxController {
       'sub': sub,
     };
 
-    var respons =
-        await http.post(Uri.parse('http://10.0.2.2/api/order.php'), body: data);
+    var respons = await http.post(
+        Uri.parse('https://sanggar-batik.wstif3a-bws.id/api/order.php'),
+        body: data);
 
     // print(jsonDecode(respons.body));
     var uji = jsonEncode(jsonDecode(respons.body));
@@ -311,7 +319,7 @@ class GetxSnippet extends GetxController {
 
   openwhat() async {
     getdata();
-    var whats = "085791643208";
+    var whats = "082142151597";
     var whatsURL_android = "whatsapp://send?phone=" +
         whats +
         "&text=${greeting()} Saya ingin memesan product anda, dengan beratas namakan ${nama}";

@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const, invalid_use_of_visible_for_testing_member
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -31,12 +29,14 @@ class _ProfilePageState extends State<ProfilePage> {
   File? profileImage;
 
   Future getImage() async {
-    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    File? img = File(image!.path);
-    img = await cropimage(imageFile: File(image.path));
-    setState(() {
-      profileImage = img;
-    });
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print(image!.path);
+    // File? img = File(image!.path);
+    // print(img);
+    // img = await cropimage(imageFile: File(image.path));
+    // setState(() {
+    //   profileImage = img;
+    // });
   }
 
   Future<File?> cropimage({required File imageFile}) async {
@@ -49,6 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     _getData();
+    // print(profileImage);
     // print(nama);
     super.initState();
   }

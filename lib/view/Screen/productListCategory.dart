@@ -109,7 +109,7 @@ class _ProductListCategoryState extends State<ProductListCategory> {
                     return Cardvalue(
                       title: args.data![index]['nama_produk'],
                       img:
-                          "http://10.0.2.2/api/baru/uploads/${args.data![index]['gambar_produk']}",
+                          "https://sanggar-batik.wstif3a-bws.id/gambar/${args.data![index]['gambar_produk']}",
                       harga: args.data![index]['harga_produk'],
                       data: args.data![index],
                       desc: args.data![index]['rincian_produk'],
