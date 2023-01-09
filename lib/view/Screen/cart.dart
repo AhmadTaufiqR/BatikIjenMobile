@@ -85,7 +85,7 @@ class _PageCartState extends State<PageCart> {
                       title: Text(listData[index]['nama']),
                       subtitle: Text(listData[index]['harga'].toString()),
                       leading: Image.network(
-                        "http://10.0.2.2/api/baru/uploads/${listData[index]['gambar']}",
+                        "https://sanggar-batik.wstif3a-bws.id/gambar/${listData[index]['gambar']}",
                         fit: BoxFit.fill,
                       ),
                       trailing: SizedBox(

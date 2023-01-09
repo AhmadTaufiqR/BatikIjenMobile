@@ -44,7 +44,8 @@ class _resetPassState extends State<resetPass> {
     Map data = {
       'email': email,
     };
-    var url = Uri.parse("http://10.0.2.2/api/CheckingUser.php");
+    var url =
+        Uri.parse("https://sanggar-batik.wstif3a-bws.id/api/CheckingUser.php");
     var response = await http.post(url, body: data);
     final List<dynamic> datalog = jsonDecode(response.body);
     emailValidate = datalog[0]["email"];

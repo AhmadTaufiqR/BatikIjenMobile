@@ -152,7 +152,7 @@ class _DashboardAfterState extends State<DashboardAfter> {
                                     return Cardvalue(
                                       title: data[index]['nama_produk'],
                                       img:
-                                          "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
+                                          "https://sanggar-batik.wstif3a-bws.id/gambar/${data[index]['gambar_produk']}",
                                       harga: data[index]['harga_produk'],
                                       data: data[index],
                                       desc: data[index]['rincian_produk'],
@@ -227,7 +227,7 @@ class _DashboardAfterState extends State<DashboardAfter> {
                                     return Cardvalue(
                                       title: data[index]['nama_produk'],
                                       img:
-                                          "http://10.0.2.2/api/baru/uploads/${data[index]['gambar_produk']}",
+                                          "https://sanggar-batik.wstif3a-bws.id/gambar/${data[index]['gambar_produk']}",
                                       harga: data[index]['harga_produk'],
                                       data: data[index],
                                       desc: data[index]['rincian_produk'],

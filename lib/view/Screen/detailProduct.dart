@@ -64,7 +64,7 @@ class _ProductViewState extends State<ProductView> {
                 height: 350,
                 width: double.infinity,
                 child: Image.network(
-                  "http://10.0.2.2/api/baru/uploads/${datas!['gambar_produk']}",
+                  "https://sanggar-batik.wstif3a-bws.id/gambar/${datas!['gambar_produk']}",
                   fit: BoxFit.fill,
                 ),
               ),
